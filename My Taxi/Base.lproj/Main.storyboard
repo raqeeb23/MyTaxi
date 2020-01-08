@@ -331,57 +331,179 @@
                                         <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="nextButtonPressed:" destination="Wpm-7C-EWZ" eventType="touchUpInside" id="9ws-JL-ATn"/>
+                                </connections>
                             </button>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="LHT-du-EQp">
-                                <rect key="frame" x="32" y="219" width="350" height="328"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="37" translatesAutoresizingMaskIntoConstraints="NO" id="pwf-ge-IiY">
+                                <rect key="frame" x="25" y="209" width="364" height="398"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vuu-B8-cyP" customClass="myTaxiBasicTextfield" customModule="My_Taxi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="350" height="40"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7BL-Jg-O4u" customClass="myTaxiBasicTextfield" customModule="My_Taxi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="350" height="40"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wLy-7E-vvV" customClass="myTaxiBasicTextfield" customModule="My_Taxi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="144" width="350" height="40"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GA1-2x-jpW" customClass="myTaxiBasicTextfield" customModule="My_Taxi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="216" width="350" height="40"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cQy-Em-s82" customClass="myTaxiBasicTextfield" customModule="My_Taxi" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="288" width="350" height="40"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MZh-Cf-pWb">
+                                        <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Vehicle Type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cB0-v3-hPs" customClass="myTaxiBasicTextfield" customModule="My_Taxi" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUp-Gh-8qd">
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="openPickerView:" destination="Wpm-7C-EWZ" eventType="touchUpInside" id="kjR-fQ-0JQ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="5YK-UT-ocr"/>
+                                            <constraint firstItem="nUp-Gh-8qd" firstAttribute="leading" secondItem="MZh-Cf-pWb" secondAttribute="leading" id="BOT-ts-Gf6"/>
+                                            <constraint firstItem="cB0-v3-hPs" firstAttribute="leading" secondItem="MZh-Cf-pWb" secondAttribute="leading" id="DkS-m7-3YL"/>
+                                            <constraint firstItem="cB0-v3-hPs" firstAttribute="top" secondItem="MZh-Cf-pWb" secondAttribute="top" id="Fp5-ar-tvR"/>
+                                            <constraint firstAttribute="trailing" secondItem="nUp-Gh-8qd" secondAttribute="trailing" id="MG4-Kn-mCi"/>
+                                            <constraint firstAttribute="trailing" secondItem="cB0-v3-hPs" secondAttribute="trailing" id="NuV-Gj-TbO"/>
+                                            <constraint firstAttribute="bottom" secondItem="nUp-Gh-8qd" secondAttribute="bottom" id="Zku-Dr-VVP"/>
+                                            <constraint firstAttribute="bottom" secondItem="cB0-v3-hPs" secondAttribute="bottom" id="eDf-8h-n8V"/>
+                                            <constraint firstItem="nUp-Gh-8qd" firstAttribute="top" secondItem="MZh-Cf-pWb" secondAttribute="top" id="lYl-9O-dxc"/>
+                                            <constraint firstAttribute="height" constant="50" id="rcR-Ed-s7i"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ooD-rC-1zy">
+                                        <rect key="frame" x="0.0" y="87" width="364" height="50"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Make" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IL1-ir-VKz" customClass="myTaxiBasicTextfield" customModule="My_Taxi" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaZ-eA-Ky5">
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="openPickerView:" destination="Wpm-7C-EWZ" eventType="touchUpInside" id="WWj-dy-aME"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="IL1-ir-VKz" firstAttribute="top" secondItem="ooD-rC-1zy" secondAttribute="top" id="46g-u4-SYn"/>
+                                            <constraint firstAttribute="height" constant="50" id="9aa-ye-mId"/>
+                                            <constraint firstItem="xaZ-eA-Ky5" firstAttribute="leading" secondItem="ooD-rC-1zy" secondAttribute="leading" id="LAb-50-Syq"/>
+                                            <constraint firstAttribute="trailing" secondItem="xaZ-eA-Ky5" secondAttribute="trailing" id="SKp-fL-YZk"/>
+                                            <constraint firstAttribute="trailing" secondItem="IL1-ir-VKz" secondAttribute="trailing" id="cWl-kq-2UX"/>
+                                            <constraint firstAttribute="bottom" secondItem="xaZ-eA-Ky5" secondAttribute="bottom" id="g5F-bk-eGH"/>
+                                            <constraint firstAttribute="bottom" secondItem="IL1-ir-VKz" secondAttribute="bottom" id="oW7-xL-lSt"/>
+                                            <constraint firstItem="IL1-ir-VKz" firstAttribute="leading" secondItem="ooD-rC-1zy" secondAttribute="leading" id="wpN-a2-6nM"/>
+                                            <constraint firstItem="xaZ-eA-Ky5" firstAttribute="top" secondItem="ooD-rC-1zy" secondAttribute="top" id="yIa-U9-Kgr"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lkD-lu-5fn">
+                                        <rect key="frame" x="0.0" y="174" width="364" height="50"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Model" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m4g-tF-cAG" customClass="myTaxiBasicTextfield" customModule="My_Taxi" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7dk-XN-9Pi">
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="openPickerView:" destination="Wpm-7C-EWZ" eventType="touchUpInside" id="YS5-vP-KJd"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="7dk-XN-9Pi" firstAttribute="leading" secondItem="lkD-lu-5fn" secondAttribute="leading" id="0Gm-kc-Uca"/>
+                                            <constraint firstAttribute="bottom" secondItem="7dk-XN-9Pi" secondAttribute="bottom" id="OqU-xd-7Sa"/>
+                                            <constraint firstAttribute="height" constant="50" id="SD6-ws-lLQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="m4g-tF-cAG" secondAttribute="trailing" id="dMq-Ps-ENL"/>
+                                            <constraint firstItem="m4g-tF-cAG" firstAttribute="top" secondItem="lkD-lu-5fn" secondAttribute="top" id="fti-gY-AD7"/>
+                                            <constraint firstItem="7dk-XN-9Pi" firstAttribute="top" secondItem="lkD-lu-5fn" secondAttribute="top" id="hZm-zZ-JgQ"/>
+                                            <constraint firstItem="m4g-tF-cAG" firstAttribute="leading" secondItem="lkD-lu-5fn" secondAttribute="leading" id="nzw-lC-aea"/>
+                                            <constraint firstAttribute="trailing" secondItem="7dk-XN-9Pi" secondAttribute="trailing" id="tx8-fV-gOG"/>
+                                            <constraint firstAttribute="bottom" secondItem="m4g-tF-cAG" secondAttribute="bottom" id="w1r-b3-eLc"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N2q-RE-fwh">
+                                        <rect key="frame" x="0.0" y="261" width="364" height="50"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Color" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yVG-9K-Gwy" customClass="myTaxiBasicTextfield" customModule="My_Taxi" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3UH-sj-9Sr">
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="openPickerView:" destination="Wpm-7C-EWZ" eventType="touchUpInside" id="Urz-53-UH1"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="yVG-9K-Gwy" secondAttribute="trailing" id="IBp-yc-2Sf"/>
+                                            <constraint firstAttribute="trailing" secondItem="3UH-sj-9Sr" secondAttribute="trailing" id="PHy-Tl-8nX"/>
+                                            <constraint firstItem="3UH-sj-9Sr" firstAttribute="leading" secondItem="N2q-RE-fwh" secondAttribute="leading" id="TaI-d4-s1l"/>
+                                            <constraint firstItem="yVG-9K-Gwy" firstAttribute="top" secondItem="N2q-RE-fwh" secondAttribute="top" id="bWt-G5-S9b"/>
+                                            <constraint firstItem="3UH-sj-9Sr" firstAttribute="top" secondItem="N2q-RE-fwh" secondAttribute="top" id="bXG-9P-G5S"/>
+                                            <constraint firstAttribute="bottom" secondItem="yVG-9K-Gwy" secondAttribute="bottom" id="kw1-am-s94"/>
+                                            <constraint firstItem="yVG-9K-Gwy" firstAttribute="leading" secondItem="N2q-RE-fwh" secondAttribute="leading" id="m9b-xQ-bUy"/>
+                                            <constraint firstAttribute="height" constant="50" id="umr-g7-jYg"/>
+                                            <constraint firstAttribute="bottom" secondItem="3UH-sj-9Sr" secondAttribute="bottom" id="vUC-W5-xh5"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dIo-0n-WCF">
+                                        <rect key="frame" x="0.0" y="348" width="364" height="50"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Year" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kp7-83-nIH" customClass="myTaxiBasicTextfield" customModule="My_Taxi" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nNR-e2-wlU">
+                                                <rect key="frame" x="0.0" y="0.0" width="364" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="openPickerView:" destination="Wpm-7C-EWZ" eventType="touchUpInside" id="jTd-Pg-y6G"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="nNR-e2-wlU" secondAttribute="bottom" id="5Cd-tF-ZEe"/>
+                                            <constraint firstItem="nNR-e2-wlU" firstAttribute="leading" secondItem="dIo-0n-WCF" secondAttribute="leading" id="GNe-PB-ACf"/>
+                                            <constraint firstAttribute="trailing" secondItem="nNR-e2-wlU" secondAttribute="trailing" id="UBQ-6z-1ID"/>
+                                            <constraint firstAttribute="height" constant="50" id="XfC-bB-Qpp"/>
+                                            <constraint firstItem="Kp7-83-nIH" firstAttribute="leading" secondItem="dIo-0n-WCF" secondAttribute="leading" id="ZQg-EX-wpX"/>
+                                            <constraint firstAttribute="bottom" secondItem="Kp7-83-nIH" secondAttribute="bottom" id="g7A-Nl-Bxy"/>
+                                            <constraint firstItem="nNR-e2-wlU" firstAttribute="top" secondItem="dIo-0n-WCF" secondAttribute="top" id="hui-PX-7cj"/>
+                                            <constraint firstAttribute="trailing" secondItem="Kp7-83-nIH" secondAttribute="trailing" id="wIc-8e-Xq2"/>
+                                            <constraint firstItem="Kp7-83-nIH" firstAttribute="top" secondItem="dIo-0n-WCF" secondAttribute="top" id="yc5-rN-JbH"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="350" id="nIS-fF-8Hn"/>
-                                </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uos-4e-ZeV">
                                 <rect key="frame" x="0.0" y="920" width="414" height="476"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yic-wg-6ec">
-                                        <rect key="frame" x="15" y="8" width="80" height="58"/>
+                                        <rect key="frame" x="15" y="8" width="56.5" height="58"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="58" id="EqG-L1-8vj"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="44"/>
+                                        <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="31"/>
                                         <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -404,6 +526,9 @@
                                                         <integer key="value" value="25"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="cancelButtonPressed:" destination="Wpm-7C-EWZ" eventType="touchUpInside" id="94Q-mE-5H3"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3c-NW-qHK">
                                                 <rect key="frame" x="150" y="0.0" width="120" height="50"/>
@@ -417,6 +542,9 @@
                                                         <integer key="value" value="25"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="doneButtonPressed:" destination="Wpm-7C-EWZ" eventType="touchUpInside" id="OpF-hG-UGG"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -453,26 +581,36 @@
                         <constraints>
                             <constraint firstItem="dG8-zR-M6A" firstAttribute="leading" secondItem="96x-Sz-aqH" secondAttribute="leading" constant="15" id="2FQ-rj-sgG"/>
                             <constraint firstItem="dG8-zR-M6A" firstAttribute="top" secondItem="96x-Sz-aqH" secondAttribute="top" constant="25" id="8zJ-Aa-dxQ"/>
+                            <constraint firstItem="pwf-ge-IiY" firstAttribute="leading" secondItem="96x-Sz-aqH" secondAttribute="leading" constant="25" id="DVL-DC-5RY"/>
+                            <constraint firstItem="pwf-ge-IiY" firstAttribute="top" secondItem="dG8-zR-M6A" secondAttribute="bottom" constant="50" id="GAN-Hx-wA6"/>
                             <constraint firstItem="uos-4e-ZeV" firstAttribute="trailing" secondItem="96x-Sz-aqH" secondAttribute="trailing" id="Kp7-l5-w62"/>
+                            <constraint firstItem="pwf-ge-IiY" firstAttribute="centerX" secondItem="bUZ-rH-mmF" secondAttribute="centerX" id="Pen-yf-tc3"/>
                             <constraint firstItem="aGm-gP-PDq" firstAttribute="leading" secondItem="96x-Sz-aqH" secondAttribute="leading" constant="25" id="bQp-Lb-0ku"/>
                             <constraint firstAttribute="bottom" secondItem="uos-4e-ZeV" secondAttribute="bottom" constant="-500" id="bfu-eI-gOT"/>
-                            <constraint firstItem="LHT-du-EQp" firstAttribute="centerX" secondItem="bUZ-rH-mmF" secondAttribute="centerX" id="juu-4m-sDY"/>
                             <constraint firstItem="uos-4e-ZeV" firstAttribute="leading" secondItem="96x-Sz-aqH" secondAttribute="leading" id="lRk-1k-IMN"/>
                             <constraint firstItem="96x-Sz-aqH" firstAttribute="trailing" secondItem="dG8-zR-M6A" secondAttribute="trailing" constant="15" id="lw7-wr-qc9"/>
-                            <constraint firstItem="LHT-du-EQp" firstAttribute="top" secondItem="dG8-zR-M6A" secondAttribute="bottom" constant="60" id="mmw-kP-awD"/>
+                            <constraint firstItem="96x-Sz-aqH" firstAttribute="trailing" secondItem="pwf-ge-IiY" secondAttribute="trailing" constant="25" id="oDn-DB-qsh"/>
                             <constraint firstItem="96x-Sz-aqH" firstAttribute="trailing" secondItem="aGm-gP-PDq" secondAttribute="trailing" constant="25" id="phh-pE-iwa"/>
                             <constraint firstItem="96x-Sz-aqH" firstAttribute="bottom" secondItem="aGm-gP-PDq" secondAttribute="bottom" constant="25" id="t31-cn-bHH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="96x-Sz-aqH"/>
                     </view>
                     <connections>
+                        <outlet property="ItemPicker" destination="VcW-Kc-xYO" id="dVd-AB-3Q5"/>
                         <outlet property="btnCancel" destination="16P-Fu-gHl" id="4bm-h1-6n7"/>
+                        <outlet property="btnColor" destination="3UH-sj-9Sr" id="v2n-9W-ekP"/>
+                        <outlet property="btnDone" destination="Y3c-NW-qHK" id="m6e-63-pfA"/>
+                        <outlet property="btnMake" destination="xaZ-eA-Ky5" id="Vks-9x-Zz0"/>
+                        <outlet property="btnModel" destination="7dk-XN-9Pi" id="nGr-U0-oIs"/>
+                        <outlet property="btnVehicleType" destination="nUp-Gh-8qd" id="0WC-Y3-OXB"/>
+                        <outlet property="btnYear" destination="nNR-e2-wlU" id="bnZ-xw-OH9"/>
+                        <outlet property="constraintForPickerView" destination="bfu-eI-gOT" id="pll-bs-hAI"/>
                         <outlet property="lblPIckerTitle" destination="yic-wg-6ec" id="mbq-PQ-sJF"/>
-                        <outlet property="txtColor" destination="GA1-2x-jpW" id="jJk-64-Tsq"/>
-                        <outlet property="txtMake" destination="7BL-Jg-O4u" id="y7P-VP-FDt"/>
-                        <outlet property="txtModel" destination="wLy-7E-vvV" id="pj9-wg-ddk"/>
-                        <outlet property="txtVehicleType" destination="vuu-B8-cyP" id="U4U-CJ-iV4"/>
-                        <outlet property="txtYear" destination="cQy-Em-s82" id="Igl-vo-G4p"/>
+                        <outlet property="txtColor" destination="yVG-9K-Gwy" id="zmG-cG-yKq"/>
+                        <outlet property="txtMake" destination="IL1-ir-VKz" id="UUp-Bv-2ti"/>
+                        <outlet property="txtModel" destination="m4g-tF-cAG" id="P46-Ic-FmS"/>
+                        <outlet property="txtVehicleType" destination="cB0-v3-hPs" id="mHU-Kx-dj6"/>
+                        <outlet property="txtYear" destination="Kp7-83-nIH" id="ugd-oB-6iQ"/>
                         <outlet property="viewItemPicker" destination="uos-4e-ZeV" id="DwL-3Q-WeR"/>
                     </connections>
                 </viewController>
@@ -480,10 +618,10 @@
             </objects>
             <point key="canvasLocation" x="3927.5362318840585" y="145.98214285714286"/>
         </scene>
-        <!--View Controller-->
+        <!--Residential Address View Controller-->
         <scene sceneID="ipZ-Ro-QWh">
             <objects>
-                <viewController id="q5r-0a-hqL" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResidentialAddressViewController" id="q5r-0a-hqL" customClass="ResidentialAddressViewController" customModule="My_Taxi" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p7f-dn-Yfk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -509,28 +647,78 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="36" translatesAutoresizingMaskIntoConstraints="NO" id="6Ff-Xd-CZF">
                                 <rect key="frame" x="32" y="247" width="350" height="308"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kkb-Zt-wQM">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OzB-Zg-Xq7">
                                         <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aDC-MO-lKr">
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kkb-Zt-wQM" customClass="myTaxiBasicTextfield" customModule="My_Taxi" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vni-CF-OB9">
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="OpenPickerView:" destination="q5r-0a-hqL" eventType="touchUpInside" id="S2V-PF-41h"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="kkb-Zt-wQM" secondAttribute="trailing" id="0y8-q1-QX6"/>
+                                            <constraint firstItem="vni-CF-OB9" firstAttribute="leading" secondItem="OzB-Zg-Xq7" secondAttribute="leading" id="I6f-wG-f8B"/>
+                                            <constraint firstItem="kkb-Zt-wQM" firstAttribute="leading" secondItem="OzB-Zg-Xq7" secondAttribute="leading" id="Jya-wv-DMP"/>
+                                            <constraint firstAttribute="bottom" secondItem="vni-CF-OB9" secondAttribute="bottom" id="QaL-pF-JBe"/>
+                                            <constraint firstAttribute="trailing" secondItem="vni-CF-OB9" secondAttribute="trailing" id="Rqw-yD-Fk3"/>
+                                            <constraint firstItem="vni-CF-OB9" firstAttribute="top" secondItem="OzB-Zg-Xq7" secondAttribute="top" id="eVh-Uy-deq"/>
+                                            <constraint firstItem="kkb-Zt-wQM" firstAttribute="top" secondItem="OzB-Zg-Xq7" secondAttribute="top" id="n5f-6C-p9O"/>
+                                            <constraint firstAttribute="bottom" secondItem="kkb-Zt-wQM" secondAttribute="bottom" id="zsn-Qc-SKk"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kAy-t0-sbP">
                                         <rect key="frame" x="0.0" y="86" width="350" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Residential Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yxF-AU-FqN">
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aDC-MO-lKr" customClass="myTaxiBasicTextfield" customModule="My_Taxi" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aTb-uC-3Gp">
+                                                <rect key="frame" x="0.0" y="0.0" width="350" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="OpenPickerView:" destination="q5r-0a-hqL" eventType="touchUpInside" id="dKU-A7-sy2"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="aDC-MO-lKr" secondAttribute="bottom" id="Ai4-mQ-H2K"/>
+                                            <constraint firstItem="aTb-uC-3Gp" firstAttribute="top" secondItem="kAy-t0-sbP" secondAttribute="top" id="GGq-6A-hhc"/>
+                                            <constraint firstAttribute="trailing" secondItem="aTb-uC-3Gp" secondAttribute="trailing" id="SvI-AC-ZoV"/>
+                                            <constraint firstAttribute="bottom" secondItem="aTb-uC-3Gp" secondAttribute="bottom" id="cq0-8a-aOa"/>
+                                            <constraint firstItem="aDC-MO-lKr" firstAttribute="leading" secondItem="kAy-t0-sbP" secondAttribute="leading" id="qAE-ng-Ppz"/>
+                                            <constraint firstItem="aDC-MO-lKr" firstAttribute="top" secondItem="kAy-t0-sbP" secondAttribute="top" id="qXi-fn-agH"/>
+                                            <constraint firstAttribute="trailing" secondItem="aDC-MO-lKr" secondAttribute="trailing" id="wiG-f2-rGM"/>
+                                            <constraint firstItem="aTb-uC-3Gp" firstAttribute="leading" secondItem="kAy-t0-sbP" secondAttribute="leading" id="z3h-wq-SQ1"/>
+                                        </constraints>
+                                    </view>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Residential Address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yxF-AU-FqN" customClass="myTaxiBasicTextfield" customModule="My_Taxi" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="172" width="350" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fty-E1-WiR">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fty-E1-WiR" customClass="myTaxiBasicTextfield" customModule="My_Taxi" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="258" width="350" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="a7h-jm-qD6"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -553,10 +741,97 @@
                                         <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="nextButtonPressed:" destination="q5r-0a-hqL" eventType="touchUpInside" id="rhn-SC-X9G"/>
+                                </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TkV-lM-JPn">
+                                <rect key="frame" x="0.0" y="920" width="414" height="476"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="47Y-3k-HWN">
+                                        <rect key="frame" x="20" y="10" width="56.5" height="58"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="58" id="8rk-El-4Zz"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Noteworthy-Bold" family="Noteworthy" pointSize="31"/>
+                                        <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fqu-1e-fkx">
+                                        <rect key="frame" x="15" y="88" width="384" height="250"/>
+                                        <color key="tintColor" red="1" green="0.4760972799" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="250" id="V5R-Qd-Wai"/>
+                                        </constraints>
+                                    </pickerView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="f0E-wF-c0Z">
+                                        <rect key="frame" x="72" y="346" width="270" height="50"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RY3-Pc-kdQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="50"/>
+                                                <color key="backgroundColor" red="1" green="0.4760972799" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="120" id="afP-hY-r8k"/>
+                                                    <constraint firstAttribute="height" constant="50" id="fkP-KX-kFB"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="25"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="cancelButtonPressed:" destination="Wpm-7C-EWZ" eventType="touchUpInside" id="Ukw-NI-7w3"/>
+                                                    <action selector="canelButtonPressed:" destination="q5r-0a-hqL" eventType="touchUpInside" id="Oqy-I8-5Pk"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h6D-86-bbe">
+                                                <rect key="frame" x="150" y="0.0" width="120" height="50"/>
+                                                <color key="backgroundColor" red="1" green="0.4760972799" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                <state key="normal" title="Done">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <integer key="value" value="25"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="doneButtonPressed:" destination="q5r-0a-hqL" eventType="touchUpInside" id="Jze-dg-iPx"/>
+                                                    <action selector="doneButtonPressed:" destination="Wpm-7C-EWZ" eventType="touchUpInside" id="vYP-IE-HSj"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="X5q-FB-Hk1"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="f0E-wF-c0Z" firstAttribute="top" secondItem="Fqu-1e-fkx" secondAttribute="bottom" constant="8" id="12H-0h-NXd"/>
+                                    <constraint firstAttribute="height" constant="476" id="25Z-CK-Uur"/>
+                                    <constraint firstItem="47Y-3k-HWN" firstAttribute="top" secondItem="TkV-lM-JPn" secondAttribute="top" constant="10" id="2nf-tf-70P"/>
+                                    <constraint firstAttribute="trailing" secondItem="Fqu-1e-fkx" secondAttribute="trailing" constant="15" id="5aJ-DF-xIq"/>
+                                    <constraint firstItem="Fqu-1e-fkx" firstAttribute="top" secondItem="47Y-3k-HWN" secondAttribute="bottom" constant="20" id="HCw-1u-omP"/>
+                                    <constraint firstItem="Fqu-1e-fkx" firstAttribute="leading" secondItem="TkV-lM-JPn" secondAttribute="leading" constant="15" id="ZH0-la-eh6"/>
+                                    <constraint firstItem="47Y-3k-HWN" firstAttribute="leading" secondItem="TkV-lM-JPn" secondAttribute="leading" constant="20" id="byz-Yc-si5"/>
+                                    <constraint firstItem="f0E-wF-c0Z" firstAttribute="centerX" secondItem="TkV-lM-JPn" secondAttribute="centerX" id="cOp-Jh-ptS"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="TkV-lM-JPn" secondAttribute="bottom" constant="-500" id="06O-yS-LSz"/>
                             <constraint firstItem="6Ff-Xd-CZF" firstAttribute="centerX" secondItem="p7f-dn-Yfk" secondAttribute="centerX" id="1Uh-zS-iJw"/>
                             <constraint firstItem="vPW-mB-FLW" firstAttribute="trailing" secondItem="njT-3D-XjH" secondAttribute="trailing" constant="25" id="4ph-lz-32o"/>
                             <constraint firstItem="Wn2-5v-T4m" firstAttribute="leading" secondItem="vPW-mB-FLW" secondAttribute="leading" constant="25" id="At8-1s-1oJ"/>
@@ -564,17 +839,30 @@
                             <constraint firstItem="FGy-HI-wzs" firstAttribute="leading" secondItem="vPW-mB-FLW" secondAttribute="leading" constant="20" id="FEu-wD-vhQ"/>
                             <constraint firstItem="njT-3D-XjH" firstAttribute="top" secondItem="vPW-mB-FLW" secondAttribute="top" constant="25" id="Fy5-hy-Tma"/>
                             <constraint firstItem="6Ff-Xd-CZF" firstAttribute="top" secondItem="FGy-HI-wzs" secondAttribute="bottom" constant="60" id="JKf-qy-IZa"/>
+                            <constraint firstItem="TkV-lM-JPn" firstAttribute="leading" secondItem="p7f-dn-Yfk" secondAttribute="leading" id="LmR-ze-cNP"/>
                             <constraint firstItem="vPW-mB-FLW" firstAttribute="trailing" secondItem="Wn2-5v-T4m" secondAttribute="trailing" constant="25" id="mQc-9R-zFb"/>
+                            <constraint firstAttribute="trailing" secondItem="TkV-lM-JPn" secondAttribute="trailing" id="nQh-4z-6kg"/>
                             <constraint firstItem="njT-3D-XjH" firstAttribute="leading" secondItem="vPW-mB-FLW" secondAttribute="leading" constant="25" id="thZ-u2-qfO"/>
                             <constraint firstItem="FGy-HI-wzs" firstAttribute="top" secondItem="njT-3D-XjH" secondAttribute="bottom" constant="8" id="vtY-6H-n2Q"/>
                             <constraint firstItem="vPW-mB-FLW" firstAttribute="trailing" secondItem="FGy-HI-wzs" secondAttribute="trailing" constant="20" id="zo3-Ru-6AW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vPW-mB-FLW"/>
                     </view>
+                    <connections>
+                        <outlet property="btnCity" destination="aTb-uC-3Gp" id="MWW-2w-rNV"/>
+                        <outlet property="btnState" destination="vni-CF-OB9" id="I1T-ke-T9E"/>
+                        <outlet property="constraintBottomPickerView" destination="06O-yS-LSz" id="G5o-O3-ymu"/>
+                        <outlet property="itemPickerView" destination="Fqu-1e-fkx" id="Cx1-BD-0tK"/>
+                        <outlet property="lblPickerTitle" destination="47Y-3k-HWN" id="7MK-7f-UrU"/>
+                        <outlet property="txtCity" destination="aDC-MO-lKr" id="uf1-Fe-Liq"/>
+                        <outlet property="txtResidentialAddress" destination="yxF-AU-FqN" id="b6e-ET-3Lt"/>
+                        <outlet property="txtState" destination="kkb-Zt-wQM" id="Dx4-AF-j1j"/>
+                        <outlet property="txtZipCode" destination="Fty-E1-WiR" id="lqw-vo-Kjj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="syr-OV-okd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4784" y="149"/>
+            <point key="canvasLocation" x="4782.608695652174" y="148.66071428571428"/>
         </scene>
         <!--Verification Code View Controller-->
         <scene sceneID="EgU-a6-akl">
@@ -712,10 +1000,10 @@
             </objects>
             <point key="canvasLocation" x="2463.768115942029" y="145.98214285714286"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Photo View Controller-->
         <scene sceneID="b9p-4x-b6h">
             <objects>
-                <viewController id="56b-C8-4P5" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddPhotoViewController" id="56b-C8-4P5" customClass="AddPhotoViewController" customModule="My_Taxi" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="92Y-Mg-lJm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -746,6 +1034,7 @@
                                     <constraint firstAttribute="height" constant="200" id="J4Q-5V-i1C"/>
                                     <constraint firstAttribute="width" constant="200" id="qwK-Gg-a29"/>
                                 </constraints>
+                                <color key="tintColor" red="1" green="0.4760972799" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="camera.circle.fill" catalog="system"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfa-rd-sf6">
@@ -825,8 +1114,9 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="National Id" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z9K-HY-rZT">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="National Id" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z9K-HY-rZT" customClass="myTaxiBasicTextfield" customModule="My_Taxi" customModuleProvider="target">
                                 <rect key="frame" x="32" y="347" width="350" height="50"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="350" id="BbX-VW-Nbf"/>
                                     <constraint firstAttribute="height" constant="50" id="nD3-3s-Pwk"/>

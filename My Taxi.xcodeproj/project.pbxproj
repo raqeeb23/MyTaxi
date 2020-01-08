@@ -20,6 +20,8 @@
 		9A4FCF1023BE030F00F87F62 /* EnterPhoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4FCF0F23BE030F00F87F62 /* EnterPhoneViewController.swift */; };
 		9AB704A023C31788007DA449 /* AddVehicleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AB7049F23C31788007DA449 /* AddVehicleViewController.swift */; };
 		9AB704A223C33C09007DA449 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9AB704A123C33C09007DA449 /* GoogleService-Info.plist */; };
+		9AC6522A23C4CA2A00A15CFE /* ResidentialAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AC6522923C4CA2A00A15CFE /* ResidentialAddressViewController.swift */; };
+		9AFB15D823C5A9230009CB21 /* AddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFB15D723C5A9230009CB21 /* AddPhotoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		9A4FCF0F23BE030F00F87F62 /* EnterPhoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPhoneViewController.swift; sourceTree = "<group>"; };
 		9AB7049F23C31788007DA449 /* AddVehicleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddVehicleViewController.swift; sourceTree = "<group>"; };
 		9AB704A123C33C09007DA449 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9AC6522923C4CA2A00A15CFE /* ResidentialAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResidentialAddressViewController.swift; sourceTree = "<group>"; };
+		9AFB15D723C5A9230009CB21 /* AddPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoViewController.swift; sourceTree = "<group>"; };
 		9D5D897A33A3DA8EFDF24F4D /* Pods_My_Taxi.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_My_Taxi.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D5E4A88243922CCBF8F6376 /* Pods-My Taxi.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-My Taxi.debug.xcconfig"; path = "Target Support Files/Pods-My Taxi/Pods-My Taxi.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +102,8 @@
 				9A1F8A9523BF57E100F07D2F /* VerificationCodeViewController.swift */,
 				9A1F67F023C0B37600477703 /* CustomControls.swift */,
 				9A4FCF0123BDD3E400F87F62 /* Main.storyboard */,
+				9AFB15D723C5A9230009CB21 /* AddPhotoViewController.swift */,
+				9AC6522923C4CA2A00A15CFE /* ResidentialAddressViewController.swift */,
 				9AB7049F23C31788007DA449 /* AddVehicleViewController.swift */,
 				9A1F67F223C0B96B00477703 /* PersonalInfoViewController.swift */,
 				9A4FCF0F23BE030F00F87F62 /* EnterPhoneViewController.swift */,
@@ -228,9 +234,11 @@
 				9A4FCF1023BE030F00F87F62 /* EnterPhoneViewController.swift in Sources */,
 				9AB704A023C31788007DA449 /* AddVehicleViewController.swift in Sources */,
 				9A4FCF0023BDD3E400F87F62 /* ViewController.swift in Sources */,
+				9AC6522A23C4CA2A00A15CFE /* ResidentialAddressViewController.swift in Sources */,
 				9A4FCEFC23BDD3E400F87F62 /* AppDelegate.swift in Sources */,
 				9A1F8A9623BF57E100F07D2F /* VerificationCodeViewController.swift in Sources */,
 				9A1F67F323C0B96B00477703 /* PersonalInfoViewController.swift in Sources */,
+				9AFB15D823C5A9230009CB21 /* AddPhotoViewController.swift in Sources */,
 				9A4FCEFE23BDD3E400F87F62 /* SceneDelegate.swift in Sources */,
 				9A1F67F123C0B37600477703 /* CustomControls.swift in Sources */,
 			);
