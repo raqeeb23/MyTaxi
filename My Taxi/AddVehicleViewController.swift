@@ -29,19 +29,53 @@ enum PickerType{
 }
 
 struct VehicleInfo: Decodable {
-    let statusCode: Int?
-    let msg: String?
-    let status: Bool?
-    let type: String?
+    let statusCode: Int
+    let msg: String
+    let status: Bool
+    let type: String
     var data: [vehicle]
 }
 
 struct vehicle: Decodable {
-    let type: Int?
-    let name: String?
-    let typeForGetMakersAndModelAPi: String?
-    let capacity: Int?
+    let type: Int
+    let name: String
+    let typeForGetMakersAndModelsAPi: String?
+    let capacity: Int
 }
+
+struct VehicleMakerInfo: Decodable{
+    let statusCode: Int
+    let msg: String
+    let status: Bool
+    let type: String
+    var data: [VMaker]
+}
+
+struct VMaker: Decodable {
+    let MakeId: Int
+    let MakeName: String
+    let VehicleTypeId: Int
+    let VehicleTypeName: String
+}
+
+struct VehicleModelInfo: Decodable{
+    let statusCode: Int
+    let msg: String
+    let status: Bool
+    let type: String
+    var data: [VModel]
+}
+
+struct VModel: Decodable {
+    let Make_ID: Int
+    let Make_Name: String
+    let Model_ID: Int
+    let Model_Name: String
+    let VehicleTypeId: Int
+    let VehicleTypeName: String
+}
+
+
 
 class AddVehicleViewController: UIViewController {
     
@@ -70,7 +104,9 @@ class AddVehicleViewController: UIViewController {
     
     
     var tempArray: [[String : Any]]?
-    var vehicleInfo: VehicleInfo?
+    var vehicleTypeArray: [vehicle]?
+    var makerArray: [VMaker]?
+    var modelArray: [VModel]?
     var pickerType:PickerType = .vehicletypePicker
     var CurrentToken: String?
     
@@ -100,19 +136,20 @@ class AddVehicleViewController: UIViewController {
         
         
         switch lblPIckerTitle.text {
-        
+            
         case Names.vehicleType.rawValue:
-            txtVehicleType.text = vehicleInfo?.data[ItemPicker.selectedRow(inComponent: 0)].name
-        
+            txtVehicleType.text = vehicleTypeArray?[ItemPicker.selectedRow(inComponent: 0)].name
+            
         case Names.make.rawValue:
-            txtMake.text = "demo text"
+            txtMake.text = makerArray?[ItemPicker.selectedRow(inComponent: 0)].MakeName
+            
             
         case Names.model.rawValue:
-            txtModel.text = "demo text"
+            txtModel.text = modelArray?[ItemPicker.selectedRow(inComponent: 0)].Model_Name
             
         case Names.color.rawValue:
             txtColor.text = carColors[ItemPicker.selectedRow(inComponent: 0)]
-         
+            
         case Names.year.rawValue:
             txtYear.text = carYear[ItemPicker.selectedRow(inComponent: 0)]
             
@@ -141,16 +178,25 @@ class AddVehicleViewController: UIViewController {
             
         case btnMake:
             lblPIckerTitle.text = Names.make.rawValue
-            pickerType = .makePicker
-            //add fetch data method here
+            if txtVehicleType.text != nil{
+                guard  let vehicleType = vehicleTypeArray?[ItemPicker.selectedRow(inComponent: 0)].typeForGetMakersAndModelsAPi else {return}
+                pickerType = .makePicker
+                //add fetch data method here
+                let url = "vehicleMakers?type=\(vehicleType)"
+                fetchData(url: url, button: sender)
+            }
             ItemPicker.reloadAllComponents()
             constraintForPickerView.constant = 0
             UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
             
         case btnModel:
-            
             lblPIckerTitle.text = Names.model.rawValue
-            pickerType = .modelPicker
+            if txtMake.text != nil{
+                guard let vehicleType = vehicleTypeArray?[ItemPicker.selectedRow(inComponent: 0)].typeForGetMakersAndModelsAPi , let vehicleMakeId = makerArray?[ItemPicker.selectedRow(inComponent: 0)].MakeId else {return}
+                let url = "vehicleModels?type=\(vehicleType)&makeId=\(vehicleMakeId).0"
+                fetchData(url: url, button: sender)
+                pickerType = .modelPicker
+            }
             ItemPicker.reloadAllComponents()
             // add fetch data method here
             constraintForPickerView.constant = 0
@@ -175,7 +221,7 @@ class AddVehicleViewController: UIViewController {
         }
         
     }
-
+    
     
     //MARK: Method To get Token
     
@@ -216,22 +262,20 @@ class AddVehicleViewController: UIViewController {
             switch button {
             case self.btnVehicleType:
                 do {
-                    self.vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
+                    let vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
+                    self.vehicleTypeArray = vehicleInfo.data
                     //print(self.vehicleInfo)
                 } catch let error {print(error.localizedDescription)}
-               
+                
                 DispatchQueue.main.async {
                     self.ItemPicker.reloadAllComponents()
                 }
                 
             case self.btnMake:
                 do {
-                    self.vehicleInfo?.data.removeAll()
-                    self.vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
-                     
+                    let makerInfo = try JSONDecoder().decode(VehicleMakerInfo.self, from: data)
+                    self.makerArray = makerInfo.data
                 } catch let error {print(error.localizedDescription)}
-                
-                
                 
                 DispatchQueue.main.async {
                     self.ItemPicker.reloadAllComponents()
@@ -239,12 +283,9 @@ class AddVehicleViewController: UIViewController {
                 
             case self.btnModel:
                 do {
-                    self.vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
-                   
+                    let modelInfo = try JSONDecoder().decode(VehicleModelInfo.self, from: data)
+                    self.modelArray = modelInfo.data
                 } catch let error {print(error.localizedDescription)}
-                
-                
-                
                 DispatchQueue.main.async {
                     self.ItemPicker.reloadAllComponents()
                 }
@@ -280,11 +321,11 @@ extension AddVehicleViewController: UIPickerViewDataSource{
         switch pickerType {
             
         case .vehicletypePicker:
-            return vehicleInfo?.data.count ?? 0
+            return vehicleTypeArray?.count ?? 0
         case .makePicker:
-            return 1
+            return makerArray?.count ?? 0
         case .modelPicker:
-            return 1
+            return modelArray?.count ?? 0
         case .colorPicker:
             return carColors.count
         case .yearPicker:
@@ -300,11 +341,11 @@ extension AddVehicleViewController: UIPickerViewDataSource{
         switch pickerType {
             
         case .vehicletypePicker:
-            title = vehicleInfo?.data[row].name ?? ""
+            title = vehicleTypeArray?[row].name ?? ""
         case .makePicker:
-            title = "data not found"
+            title = makerArray?[row].MakeName ?? ""
         case .modelPicker:
-            title = "data not found"
+            title = modelArray?[row].Model_Name ?? ""
         case .colorPicker:
             title = carColors[row]
         case .yearPicker:
