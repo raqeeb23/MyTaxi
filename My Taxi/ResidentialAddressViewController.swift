@@ -30,15 +30,54 @@ class ResidentialAddressViewController: UIViewController {
     
     var pickerType: PickerType = .state
     
-    let stateArray = ["MP"]
-    let cityArray = ["Ujjain"]
+    let stateArray = ["Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jammu and Kashmir",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttarakhand",
+    "Uttar Pradesh",
+    "West Bengal",
+    "Andaman and Nicobar Islands",
+    "Chandigarh",
+    "Dadra and Nagar Haveli",
+    "Daman and Diu",
+    "Delhi",
+    "Lakshadweep",
+    "Puducherry"]
+    let cityArray = ["Ujjain", "Bhopal" , "Dewas" , "Indore" , "Maksi" ]
     
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        txtResidentialAddress.delegate = self
+        txtZipCode.delegate = self
+        
+        itemPickerView.delegate = self
+        itemPickerView.dataSource = self
         // Do any additional setup after loading the view.
     }
     
@@ -87,6 +126,10 @@ class ResidentialAddressViewController: UIViewController {
                default:
                    break
                }
+        
+        constraintBottomPickerView.constant = -500
+        UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
+        
     }
     
     
@@ -134,7 +177,7 @@ extension ResidentialAddressViewController: UIPickerViewDataSource{
 extension ResidentialAddressViewController: UITextFieldDelegate{
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
-        case txtResidentialAddress :
+        case txtResidentialAddress:
             txtZipCode.becomeFirstResponder()
         case txtZipCode:
             textField.resignFirstResponder()

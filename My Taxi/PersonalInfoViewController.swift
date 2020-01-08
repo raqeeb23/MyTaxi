@@ -12,9 +12,7 @@ class PersonalInfoViewController: UIViewController {
 
     @IBOutlet weak var txtFirstName: myTaxiBasicTextfield!
     @IBOutlet weak var txtLastName: myTaxiBasicTextfield!
-    
     @IBOutlet weak var txtEmail: myTaxiBasicTextfield!
-    
     @IBOutlet weak var txtDateOfBirth: myTaxiBasicTextfield!
     
     let datePicker = UIDatePicker()
