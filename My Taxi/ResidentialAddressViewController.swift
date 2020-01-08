@@ -136,6 +136,7 @@ class ResidentialAddressViewController: UIViewController {
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(identifier: "AddPhotoViewController") as! AddPhotoViewController
+        navigationController?.pushViewController(vc , animated: true)
     }
 }
 

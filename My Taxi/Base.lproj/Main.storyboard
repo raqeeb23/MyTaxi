@@ -1032,14 +1032,29 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kTp-JY-jTI">
+                                <rect key="frame" x="107" y="348" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="a1a-hq-eIF"/>
+                                    <constraint firstAttribute="height" constant="200" id="iHP-Oo-meo"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZV-v0-90q">
-                                <rect key="frame" x="107" y="348.5" width="200" height="199"/>
+                                <rect key="frame" x="107" y="349" width="200" height="197.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="J4Q-5V-i1C"/>
                                     <constraint firstAttribute="width" constant="200" id="qwK-Gg-a29"/>
                                 </constraints>
-                                <color key="tintColor" red="1" green="0.4760972799" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" backgroundImage="camera.circle.fill" catalog="system"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" backgroundImage="plus.app" catalog="system"/>
+                                <connections>
+                                    <action selector="addPhotoButtonTapped:" destination="56b-C8-4P5" eventType="touchUpInside" id="XfJ-Pb-dER"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add photo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfa-rd-sf6">
                                 <rect key="frame" x="164.5" y="553" width="85" height="20"/>
@@ -1065,6 +1080,9 @@
                                         <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="nextButtonPressed:" destination="56b-C8-4P5" eventType="touchUpInside" id="PYJ-sW-fpI"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
@@ -1076,24 +1094,29 @@
                             <constraint firstItem="tfa-rd-sf6" firstAttribute="centerX" secondItem="92Y-Mg-lJm" secondAttribute="centerX" id="Xgn-dA-keu"/>
                             <constraint firstItem="4GO-O4-PAK" firstAttribute="leading" secondItem="sZa-NZ-5re" secondAttribute="leading" constant="15" id="aeW-re-3nE"/>
                             <constraint firstItem="sZa-NZ-5re" firstAttribute="bottom" secondItem="SCw-3M-1hq" secondAttribute="bottom" constant="25" id="cgr-kI-GfF"/>
+                            <constraint firstItem="kTp-JY-jTI" firstAttribute="centerY" secondItem="92Y-Mg-lJm" secondAttribute="centerY" id="dX2-LZ-QKA"/>
                             <constraint firstItem="sZa-NZ-5re" firstAttribute="trailing" secondItem="4GO-O4-PAK" secondAttribute="trailing" constant="15" id="ehQ-y1-yGZ"/>
                             <constraint firstItem="sZa-NZ-5re" firstAttribute="trailing" secondItem="Bas-Ap-iKc" secondAttribute="trailing" constant="20" id="enm-zO-HfK"/>
                             <constraint firstItem="Bas-Ap-iKc" firstAttribute="top" secondItem="4GO-O4-PAK" secondAttribute="bottom" constant="8" id="ioG-Lo-fle"/>
                             <constraint firstItem="SCw-3M-1hq" firstAttribute="leading" secondItem="sZa-NZ-5re" secondAttribute="leading" constant="25" id="pEb-v6-AOR"/>
                             <constraint firstItem="tfa-rd-sf6" firstAttribute="top" secondItem="TZV-v0-90q" secondAttribute="bottom" constant="5" id="rE7-Ke-sQC"/>
+                            <constraint firstItem="kTp-JY-jTI" firstAttribute="centerX" secondItem="92Y-Mg-lJm" secondAttribute="centerX" id="taI-3D-9KI"/>
                             <constraint firstItem="Bas-Ap-iKc" firstAttribute="leading" secondItem="sZa-NZ-5re" secondAttribute="leading" constant="20" id="vXk-qJ-4cL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sZa-NZ-5re"/>
                     </view>
+                    <connections>
+                        <outlet property="imgProfile" destination="kTp-JY-jTI" id="1oY-aX-34A"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K2b-aL-1k3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5662" y="146"/>
+            <point key="canvasLocation" x="5660.8695652173919" y="145.98214285714286"/>
         </scene>
-        <!--View Controller-->
+        <!--Bank Verification View Controller-->
         <scene sceneID="At7-iu-UwU">
             <objects>
-                <viewController id="O6o-xq-T8a" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BankVerificationViewController" id="O6o-xq-T8a" customClass="BankVerificationViewController" customModule="My_Taxi" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EqZ-bV-zgQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1144,6 +1167,9 @@
                                         <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="doneButtonPressed:" destination="O6o-xq-T8a" eventType="touchUpInside" id="jNy-hC-UdU"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
@@ -1161,6 +1187,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YL6-1o-e9e"/>
                     </view>
+                    <connections>
+                        <outlet property="txtBankVerficationNo" destination="z9K-HY-rZT" id="nN0-yI-9x8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MbJ-FM-x8c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1168,6 +1197,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="camera.circle.fill" catalog="system" width="64" height="60"/>
+        <image name="plus.app" catalog="system" width="64" height="56"/>
     </resources>
 </document>

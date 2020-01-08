@@ -10,4 +10,5 @@ target 'My Taxi' do
    pod 'Firebase'
    pod 'SVProgressHUD'
    pod 'Firebase/Auth'
+   pod 'Firebase/Storage'
 end
