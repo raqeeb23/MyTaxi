@@ -265,6 +265,7 @@ class AddVehicleViewController: UIViewController {
                     let vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
                     self.vehicleTypeArray = vehicleInfo.data
                     //print(self.vehicleInfo)
+                    
                 } catch let error {print(error.localizedDescription)}
                 
                 DispatchQueue.main.async {
