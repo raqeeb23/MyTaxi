@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-
+import SVProgressHUD
 
 enum Names: String {
     case vehicleType = "Vehicle Type"
@@ -107,6 +107,11 @@ class AddVehicleViewController: UIViewController {
     var vehicleTypeArray: [vehicle]?
     var makerArray: [VMaker]?
     var modelArray: [VModel]?
+    
+    var selectedVehicleType: vehicle?
+    var selectedMaker: VMaker?
+    var selectedModel: VModel?
+    
     var pickerType:PickerType = .vehicletypePicker
     var CurrentToken: String?
     
@@ -119,6 +124,7 @@ class AddVehicleViewController: UIViewController {
         super.viewDidLoad()
         ItemPicker.delegate = self
         ItemPicker.dataSource = self
+        //FetchData(url: "vehicleTypes" , forThis: .vehicleType)
         
         // Do any additional setup after loading the view.
         
@@ -138,14 +144,19 @@ class AddVehicleViewController: UIViewController {
         switch lblPIckerTitle.text {
             
         case Names.vehicleType.rawValue:
-            txtVehicleType.text = vehicleTypeArray?[ItemPicker.selectedRow(inComponent: 0)].name
+            selectedVehicleType = vehicleTypeArray?[ItemPicker.selectedRow(inComponent: 0)]
+            txtVehicleType.text = selectedVehicleType?.name
+            refreshMakerModel()
             
         case Names.make.rawValue:
-            txtMake.text = makerArray?[ItemPicker.selectedRow(inComponent: 0)].MakeName
+            selectedMaker = makerArray?[ItemPicker.selectedRow(inComponent: 0)]
+            txtMake.text = selectedMaker?.MakeName
+            refreshModel()
             
             
         case Names.model.rawValue:
-            txtModel.text = modelArray?[ItemPicker.selectedRow(inComponent: 0)].Model_Name
+            selectedModel = modelArray?[ItemPicker.selectedRow(inComponent: 0)]
+            txtModel.text = selectedModel?.Model_Name
             
         case Names.color.rawValue:
             txtColor.text = carColors[ItemPicker.selectedRow(inComponent: 0)]
@@ -170,6 +181,7 @@ class AddVehicleViewController: UIViewController {
         
         switch sender {
         case btnVehicleType:
+            
             lblPIckerTitle.text = Names.vehicleType.rawValue
             pickerType = .vehicletypePicker
             self.fetchData(url: "vehicleTypes" , button: sender)
@@ -178,8 +190,9 @@ class AddVehicleViewController: UIViewController {
             
         case btnMake:
             lblPIckerTitle.text = Names.make.rawValue
+            
             if txtVehicleType.text != nil{
-                guard  let vehicleType = vehicleTypeArray?[ItemPicker.selectedRow(inComponent: 0)].typeForGetMakersAndModelsAPi else {return}
+                guard  let vehicleType = selectedVehicleType?.typeForGetMakersAndModelsAPi else {return}
                 pickerType = .makePicker
                 //add fetch data method here
                 let url = "vehicleMakers?type=\(vehicleType)"
@@ -192,7 +205,7 @@ class AddVehicleViewController: UIViewController {
         case btnModel:
             lblPIckerTitle.text = Names.model.rawValue
             if txtMake.text != nil{
-                guard let vehicleType = vehicleTypeArray?[ItemPicker.selectedRow(inComponent: 0)].typeForGetMakersAndModelsAPi , let vehicleMakeId = makerArray?[ItemPicker.selectedRow(inComponent: 0)].MakeId else {return}
+                guard let vehicleType = selectedVehicleType?.typeForGetMakersAndModelsAPi , let vehicleMakeId = selectedMaker?.MakeId else {return}
                 let url = "vehicleModels?type=\(vehicleType)&makeId=\(vehicleMakeId).0"
                 fetchData(url: url, button: sender)
                 pickerType = .modelPicker
@@ -234,6 +247,12 @@ class AddVehicleViewController: UIViewController {
     }
     
     //MARK: Method To fetch Data from api
+    
+    func fetchDataForVehicleType(){
+        //fetchData(url: "vehicleTypes", button: <#T##UIButton#>)
+    }
+    
+    
     
     func fetchData(url: String , button: UIButton) {
         getToken()
@@ -297,11 +316,78 @@ class AddVehicleViewController: UIViewController {
         task.resume()
     }
     
-    
+    //////////////////////////////////////////////////////////////////
+    func FetchData(url: String , forThis: Names) {
+        let currentUser = Auth.auth().currentUser
+        currentUser?.getIDToken(completion: { (token, error) in
+            self.CurrentToken = token
+            print(token)
+        })
+        let url = URL(string: "http://api.mevron.com/v1/user/\(url)")
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        guard let tokenId = CurrentToken else { return }
+        request.allHTTPHeaderFields = ["Authorization" : "\(tokenId)"]
+        
+        let task = URLSession.shared.dataTask(with: request){
+            (data , response , error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else { return }
+            print(httpResponse.statusCode)
+            
+            guard let data = data else {
+                print(error.debugDescription)
+                return
+            }
+            switch forThis{
+            case .vehicleType:
+                do {
+                    let vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
+                    self.vehicleTypeArray = vehicleInfo.data
+                    //print(self.vehicleInfo)
+                } catch let error {print(error.localizedDescription)}
+                    DispatchQueue.main.async {
+                    self.ItemPicker.reloadAllComponents()
+                }
+            case .make:
+                print("not available")
+            case .model:
+                print("not available")
+            default:
+                print("sorrry")
+            }
+            
+        }
+        task.resume()
+    }
+    ////////////////////////////////////////////////////////////////
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(identifier: "ResidentialAddressViewController") as! ResidentialAddressViewController
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    //MARK: refresh methods to unload the maker and model
+    
+    func refreshMakerModel (){
+        makerArray?.removeAll()
+        modelArray?.removeAll()
+        txtMake.text = ""
+        txtModel.text = ""
+        selectedMaker = nil
+        selectedModel = nil
+        }
+    
+    func refreshModel () {
+        modelArray?.removeAll()
+        txtModel.text = ""
+        selectedModel = nil
+        
     }
     
 }
