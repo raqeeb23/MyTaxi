@@ -8,7 +8,7 @@
 
 import UIKit
 import Firebase
-
+import SVProgressHUD
 
 enum Names: String {
     case vehicleType = "Vehicle Type"
@@ -125,8 +125,10 @@ class AddVehicleViewController: UIViewController {
         ItemPicker.delegate = self
         ItemPicker.dataSource = self
         
-        // Do any additional setup after loading the view.
-        
+        // Do any additional setup after loading the view
+        SVProgressHUD.show()
+        getToken()
+        SVProgressHUD.dismiss()
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
@@ -245,7 +247,7 @@ class AddVehicleViewController: UIViewController {
     //MARK: Method To fetch Data from api
     
     func fetchData(url: String , button: UIButton) {
-        getToken()
+        //getToken()
         let url = URL(string: "http://api.mevron.com/v1/user/\(url)")
         var request = URLRequest(url: url!)
         request.httpMethod = "GET"
@@ -253,16 +255,17 @@ class AddVehicleViewController: UIViewController {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         guard let tokenId = CurrentToken else { return }
         request.allHTTPHeaderFields = ["Authorization" : "\(tokenId)"]
-        
+        SVProgressHUD.show()
         let task = URLSession.shared.dataTask(with: request){
             (data , response , error) in
             if let error = error {
+                self.hideLoader()
                 print(error.localizedDescription)
             }
             
             guard let httpResponse = response as? HTTPURLResponse else { return }
             print(httpResponse.statusCode)
-            
+            self.hideLoader()
             guard let data = data else {
                 print(error.debugDescription)
                 return
@@ -327,6 +330,11 @@ class AddVehicleViewController: UIViewController {
         modelArray?.removeAll()
         txtModel.text = ""
         selectdModel = nil
+    }
+    func hideLoader (){
+        DispatchQueue.main.async {
+            SVProgressHUD.dismiss()
+        }
     }
 }
 
