@@ -107,6 +107,11 @@ class AddVehicleViewController: UIViewController {
     var vehicleTypeArray: [vehicle]?
     var makerArray: [VMaker]?
     var modelArray: [VModel]?
+    
+    var selectedVehicleType: vehicle?
+    var selectedMaker: VMaker?
+    var selectdModel: VModel?
+    
     var pickerType:PickerType = .vehicletypePicker
     var CurrentToken: String?
     
@@ -138,14 +143,18 @@ class AddVehicleViewController: UIViewController {
         switch lblPIckerTitle.text {
             
         case Names.vehicleType.rawValue:
-            txtVehicleType.text = vehicleTypeArray?[ItemPicker.selectedRow(inComponent: 0)].name
+            selectedVehicleType = vehicleTypeArray?[ItemPicker.selectedRow(inComponent: 0)]
+            txtVehicleType.text = selectedVehicleType?.name
+            refreshMakerAndModel()
             
         case Names.make.rawValue:
-            txtMake.text = makerArray?[ItemPicker.selectedRow(inComponent: 0)].MakeName
-            
+            selectedMaker = makerArray?[ItemPicker.selectedRow(inComponent: 0)]
+            txtMake.text = selectedMaker?.MakeName
+            refreshModel()
             
         case Names.model.rawValue:
-            txtModel.text = modelArray?[ItemPicker.selectedRow(inComponent: 0)].Model_Name
+            selectdModel = modelArray?[ItemPicker.selectedRow(inComponent: 0)]
+            txtModel.text = selectdModel?.Model_Name
             
         case Names.color.rawValue:
             txtColor.text = carColors[ItemPicker.selectedRow(inComponent: 0)]
@@ -179,7 +188,7 @@ class AddVehicleViewController: UIViewController {
         case btnMake:
             lblPIckerTitle.text = Names.make.rawValue
             if txtVehicleType.text != nil{
-                guard  let vehicleType = vehicleTypeArray?[ItemPicker.selectedRow(inComponent: 0)].typeForGetMakersAndModelsAPi else {return}
+                guard  let vehicleType = selectedVehicleType?.typeForGetMakersAndModelsAPi else {return}
                 pickerType = .makePicker
                 //add fetch data method here
                 let url = "vehicleMakers?type=\(vehicleType)"
@@ -192,7 +201,7 @@ class AddVehicleViewController: UIViewController {
         case btnModel:
             lblPIckerTitle.text = Names.model.rawValue
             if txtMake.text != nil{
-                guard let vehicleType = vehicleTypeArray?[ItemPicker.selectedRow(inComponent: 0)].typeForGetMakersAndModelsAPi , let vehicleMakeId = makerArray?[ItemPicker.selectedRow(inComponent: 0)].MakeId else {return}
+                guard let vehicleType = selectedVehicleType?.typeForGetMakersAndModelsAPi , let vehicleMakeId = selectedMaker?.MakeId else {return}
                 let url = "vehicleModels?type=\(vehicleType)&makeId=\(vehicleMakeId).0"
                 fetchData(url: url, button: sender)
                 pickerType = .modelPicker
@@ -305,6 +314,20 @@ class AddVehicleViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    func refreshMakerAndModel(){
+        makerArray?.removeAll()
+        modelArray?.removeAll()
+        txtMake.text = ""
+        txtModel.text = ""
+        selectedMaker = nil
+        selectdModel = nil
+    }
+    
+    func refreshModel() {
+        modelArray?.removeAll()
+        txtModel.text = ""
+        selectdModel = nil
+    }
 }
 
 
