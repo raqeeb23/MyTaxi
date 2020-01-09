@@ -129,6 +129,20 @@ class AddVehicleViewController: UIViewController {
         SVProgressHUD.show()
         getToken()
         SVProgressHUD.dismiss()
+        fetchSomeData(url: "vehicleTypes") { (Result) in
+            switch Result {
+            case .success(let data):
+                do {
+                    let vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
+                    self.vehicleTypeArray = vehicleInfo.data
+                    self.ItemPicker.reloadAllComponents()
+                }catch let error{
+                    print(error.localizedDescription)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
@@ -183,7 +197,26 @@ class AddVehicleViewController: UIViewController {
         case btnVehicleType:
             lblPIckerTitle.text = Names.vehicleType.rawValue
             pickerType = .vehicletypePicker
-            self.fetchData(url: "vehicleTypes" , button: sender)
+            //self.fetchData(url: "vehicleTypes" , button: sender)
+            
+//            fetchSomeData(url: "vehicleTypes") { (Result) in
+//                switch Result {
+//                case .success(let data):
+//                    do {
+//                        let vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
+//                        self.vehicleTypeArray = vehicleInfo.data
+//                        DispatchQueue.main.async {
+//                            self.ItemPicker.reloadAllComponents()
+//                        }
+//                    }catch let error{
+//                        print(error.localizedDescription)
+//                    }
+//                case .failure(let error):
+//                    print(error)
+//                }
+//            }
+            
+            
             constraintForPickerView.constant = 0
             UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
             
@@ -311,6 +344,29 @@ class AddVehicleViewController: UIViewController {
     }
     
     
+    
+    func fetchSomeData(url : String , completionHandler: @escaping (Result< Data, Error >) -> () ){
+        let url = URL(string: "http://api.mevron.com/v1/user/\(url)")
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        guard let tokenId = CurrentToken else { return }
+        request.allHTTPHeaderFields = ["Authorization" : "\(tokenId)"]
+        
+        let task = URLSession.shared.dataTask(with: request) { (data , response , error) in
+            if let error = error{
+                completionHandler(.failure(error))
+            }
+            
+            guard let data = data else {return}
+            
+            completionHandler(.success(data))
+            
+            
+        }
+        task.resume()
+    }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(identifier: "ResidentialAddressViewController") as! ResidentialAddressViewController
