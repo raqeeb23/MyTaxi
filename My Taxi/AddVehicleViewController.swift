@@ -28,6 +28,7 @@ enum PickerType{
     case city
 }
 
+//Zubair: Decoding will fail if any of the variables defined insided VehicleInfo is nil, you can have optional variables in this case.
 struct VehicleInfo: Decodable {
     let statusCode: Int
     let msg: String
@@ -79,6 +80,7 @@ struct VModel: Decodable {
 
 class AddVehicleViewController: UIViewController {
     
+    //Zubair: This is good. Nice to see the proper conventions for naming IBOutlets
     
     @IBOutlet weak var txtVehicleType: myTaxiBasicTextfield!
     @IBOutlet weak var txtMake: myTaxiBasicTextfield!
@@ -168,11 +170,16 @@ class AddVehicleViewController: UIViewController {
     
     @IBAction func openPickerView(_ sender: UIButton) {
         
+        //Zubair: Rather than switching using button outlets, use enums
         switch sender {
         case btnVehicleType:
             lblPIckerTitle.text = Names.vehicleType.rawValue
             pickerType = .vehicletypePicker
+            
+            //Zubair: Why don't call fetchData go get vehicle types in viewDidLoad itself rather than calling when opening the picker.
             self.fetchData(url: "vehicleTypes" , button: sender)
+            
+            //Zubair: Rather than animating constraints each time, make a method to show/hide the picker based on the selection and animate the constraints there.
             constraintForPickerView.constant = 0
             UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
             
@@ -236,6 +243,7 @@ class AddVehicleViewController: UIViewController {
     //MARK: Method To fetch Data from api
     
     func fetchData(url: String , button: UIButton) {
+        //Zubair: You are calling getToken that returns the token in the background thread, inside the completion handler, the code that uses that token should be inside the completion handler in this case.
         getToken()
         let url = URL(string: "http://api.mevron.com/v1/user/\(url)")
         var request = URLRequest(url: url!)
@@ -259,6 +267,7 @@ class AddVehicleViewController: UIViewController {
                 return
             }
             
+            //Zubair: Again, don't switch like this, use an enum in this case
             switch button {
             case self.btnVehicleType:
                 do {
