@@ -197,7 +197,7 @@ class AddVehicleViewController: UIViewController {
         case btnVehicleType:
             lblPIckerTitle.text = Names.vehicleType.rawValue
             pickerType = .vehicletypePicker
-            //self.fetchData(url: "vehicleTypes" , button: sender)
+            self .fetchData(url: "vehicleTypes" , button: sender)
             
 //            fetchSomeData(url: "vehicleTypes") { (Result) in
 //                switch Result {
