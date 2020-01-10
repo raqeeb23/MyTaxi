@@ -8,6 +8,7 @@
 
 import UIKit
 
+//Zubair: Make sure the the class is named according to the function it performs.
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
