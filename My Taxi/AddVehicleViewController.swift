@@ -110,7 +110,7 @@ class AddVehicleViewController: UIViewController {
     
     var selectedVehicleType: vehicle?
     var selectedMaker: VMaker?
-    var selectedModel: VModel?
+    var selectdModel: VModel?
     
     var pickerType:PickerType = .vehicletypePicker
     var CurrentToken: String?
@@ -126,8 +126,24 @@ class AddVehicleViewController: UIViewController {
         ItemPicker.dataSource = self
         //FetchData(url: "vehicleTypes" , forThis: .vehicleType)
         
-        // Do any additional setup after loading the view.
-        
+        // Do any additional setup after loading the view
+        SVProgressHUD.show()
+        getToken()
+        SVProgressHUD.dismiss()
+        fetchSomeData(url: "vehicleTypes") { (Result) in
+            switch Result {
+            case .success(let data):
+                do {
+                    let vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
+                    self.vehicleTypeArray = vehicleInfo.data
+                    self.ItemPicker.reloadAllComponents()
+                }catch let error{
+                    print(error.localizedDescription)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
@@ -146,17 +162,16 @@ class AddVehicleViewController: UIViewController {
         case Names.vehicleType.rawValue:
             selectedVehicleType = vehicleTypeArray?[ItemPicker.selectedRow(inComponent: 0)]
             txtVehicleType.text = selectedVehicleType?.name
-            refreshMakerModel()
+            refreshMakerAndModel()
             
         case Names.make.rawValue:
             selectedMaker = makerArray?[ItemPicker.selectedRow(inComponent: 0)]
             txtMake.text = selectedMaker?.MakeName
             refreshModel()
             
-            
         case Names.model.rawValue:
-            selectedModel = modelArray?[ItemPicker.selectedRow(inComponent: 0)]
-            txtModel.text = selectedModel?.Model_Name
+            selectdModel = modelArray?[ItemPicker.selectedRow(inComponent: 0)]
+            txtModel.text = selectdModel?.Model_Name
             
         case Names.color.rawValue:
             txtColor.text = carColors[ItemPicker.selectedRow(inComponent: 0)]
@@ -184,7 +199,26 @@ class AddVehicleViewController: UIViewController {
             
             lblPIckerTitle.text = Names.vehicleType.rawValue
             pickerType = .vehicletypePicker
-            self.fetchData(url: "vehicleTypes" , button: sender)
+            self .fetchData(url: "vehicleTypes" , button: sender)
+            
+//            fetchSomeData(url: "vehicleTypes") { (Result) in
+//                switch Result {
+//                case .success(let data):
+//                    do {
+//                        let vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
+//                        self.vehicleTypeArray = vehicleInfo.data
+//                        DispatchQueue.main.async {
+//                            self.ItemPicker.reloadAllComponents()
+//                        }
+//                    }catch let error{
+//                        print(error.localizedDescription)
+//                    }
+//                case .failure(let error):
+//                    print(error)
+//                }
+//            }
+            
+            
             constraintForPickerView.constant = 0
             UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
             
@@ -255,7 +289,7 @@ class AddVehicleViewController: UIViewController {
     
     
     func fetchData(url: String , button: UIButton) {
-        getToken()
+        //getToken()
         let url = URL(string: "http://api.mevron.com/v1/user/\(url)")
         var request = URLRequest(url: url!)
         request.httpMethod = "GET"
@@ -263,16 +297,17 @@ class AddVehicleViewController: UIViewController {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         guard let tokenId = CurrentToken else { return }
         request.allHTTPHeaderFields = ["Authorization" : "\(tokenId)"]
-        
+        SVProgressHUD.show()
         let task = URLSession.shared.dataTask(with: request){
             (data , response , error) in
             if let error = error {
+                self.hideLoader()
                 print(error.localizedDescription)
             }
             
             guard let httpResponse = response as? HTTPURLResponse else { return }
             print(httpResponse.statusCode)
-            
+            self.hideLoader()
             guard let data = data else {
                 print(error.debugDescription)
                 return
@@ -284,6 +319,7 @@ class AddVehicleViewController: UIViewController {
                     let vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
                     self.vehicleTypeArray = vehicleInfo.data
                     //print(self.vehicleInfo)
+                    
                 } catch let error {print(error.localizedDescription)}
                 
                 DispatchQueue.main.async {
@@ -367,6 +403,29 @@ class AddVehicleViewController: UIViewController {
     }
     ////////////////////////////////////////////////////////////////
     
+    func fetchSomeData(url : String , completionHandler: @escaping (Result< Data, Error >) -> () ){
+        let url = URL(string: "http://api.mevron.com/v1/user/\(url)")
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        guard let tokenId = CurrentToken else { return }
+        request.allHTTPHeaderFields = ["Authorization" : "\(tokenId)"]
+        
+        let task = URLSession.shared.dataTask(with: request) { (data , response , error) in
+            if let error = error{
+                completionHandler(.failure(error))
+            }
+            
+            guard let data = data else {return}
+            
+            completionHandler(.success(data))
+            
+            
+        }
+        task.resume()
+    }
+    
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(identifier: "ResidentialAddressViewController") as! ResidentialAddressViewController
         navigationController?.pushViewController(vc, animated: true)
@@ -374,22 +433,25 @@ class AddVehicleViewController: UIViewController {
     
     //MARK: refresh methods to unload the maker and model
     
-    func refreshMakerModel (){
+    func refreshMakerAndModel(){
         makerArray?.removeAll()
         modelArray?.removeAll()
         txtMake.text = ""
         txtModel.text = ""
         selectedMaker = nil
-        selectedModel = nil
-        }
-    
-    func refreshModel () {
-        modelArray?.removeAll()
-        txtModel.text = ""
-        selectedModel = nil
-        
+        selectdModel = nil
     }
     
+    func refreshModel() {
+        modelArray?.removeAll()
+        txtModel.text = ""
+        selectdModel = nil
+    }
+    func hideLoader (){
+        DispatchQueue.main.async {
+            SVProgressHUD.dismiss()
+        }
+    }
 }
 
 
