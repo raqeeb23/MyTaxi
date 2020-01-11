@@ -29,50 +29,50 @@ enum PickerType{
 }
 
 struct VehicleInfo: Decodable {
-    let statusCode: Int
-    let msg: String
-    let status: Bool
-    let type: String
-    var data: [vehicle]
+    let statusCode: Int?
+    let msg: String?
+    let status: Bool?
+    let type: String?
+    var data: [vehicle]?
 }
 
 struct vehicle: Decodable {
-    let type: Int
-    let name: String
+    let type: Int?
+    let name: String?
     let typeForGetMakersAndModelsAPi: String?
-    let capacity: Int
+    let capacity: Int?
 }
 
 struct VehicleMakerInfo: Decodable{
-    let statusCode: Int
-    let msg: String
-    let status: Bool
-    let type: String
-    var data: [VMaker]
+    let statusCode: Int?
+    let msg: String?
+    let status: Bool?
+    let type: String?
+    var data: [VMaker]?
 }
 
 struct VMaker: Decodable {
-    let MakeId: Int
-    let MakeName: String
-    let VehicleTypeId: Int
-    let VehicleTypeName: String
+    let MakeId: Int?
+    let MakeName: String?
+    let VehicleTypeId: Int?
+    let VehicleTypeName: String?
 }
 
 struct VehicleModelInfo: Decodable{
-    let statusCode: Int
-    let msg: String
-    let status: Bool
-    let type: String
-    var data: [VModel]
+    let statusCode: Int?
+    let msg: String?
+    let status: Bool?
+    let type: String?
+    var data: [VModel]?
 }
 
 struct VModel: Decodable {
-    let Make_ID: Int
-    let Make_Name: String
-    let Model_ID: Int
-    let Model_Name: String
-    let VehicleTypeId: Int
-    let VehicleTypeName: String
+    let Make_ID: Int?
+    let Make_Name: String?
+    let Model_ID: Int?
+    let Model_Name: String?
+    let VehicleTypeId: Int?
+    let VehicleTypeName: String?
 }
 
 
@@ -124,144 +124,94 @@ class AddVehicleViewController: UIViewController {
         super.viewDidLoad()
         ItemPicker.delegate = self
         ItemPicker.dataSource = self
-        //FetchData(url: "vehicleTypes" , forThis: .vehicleType)
-        
         // Do any additional setup after loading the view
-        SVProgressHUD.show()
-        getToken()
-        SVProgressHUD.dismiss()
-        fetchSomeData(url: "vehicleTypes") { (Result) in
-            switch Result {
-            case .success(let data):
-                do {
-                    let vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
-                    self.vehicleTypeArray = vehicleInfo.data
-                    self.ItemPicker.reloadAllComponents()
-                }catch let error{
-                    print(error.localizedDescription)
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
+       let currentUser = Auth.auth().currentUser
+        currentUser?.getIDToken(completion: { (token, error) in
+            self.CurrentToken = token
+            print(token)
+            self.fetchData(url: "vehicleTypes", forThis: .vehicletypePicker)
+        })
+        
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
-        constraintForPickerView.constant = -500
-        UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
+       showHidePickerView(false)
     }
     
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
-        
-        //txtVehicleType.text = vehicleInfo?.data[ItemPicker.selectedRow(inComponent: 0)].name
-        
-        
-        switch lblPIckerTitle.text {
-            
-        case Names.vehicleType.rawValue:
+        switch pickerType {
+        case .vehicletypePicker:
             selectedVehicleType = vehicleTypeArray?[ItemPicker.selectedRow(inComponent: 0)]
             txtVehicleType.text = selectedVehicleType?.name
             refreshMakerAndModel()
-            
-        case Names.make.rawValue:
-            selectedMaker = makerArray?[ItemPicker.selectedRow(inComponent: 0)]
-            txtMake.text = selectedMaker?.MakeName
-            refreshModel()
-            
-        case Names.model.rawValue:
-            selectdModel = modelArray?[ItemPicker.selectedRow(inComponent: 0)]
-            txtModel.text = selectdModel?.Model_Name
-            
-        case Names.color.rawValue:
-            txtColor.text = carColors[ItemPicker.selectedRow(inComponent: 0)]
-            
-        case Names.year.rawValue:
-            txtYear.text = carYear[ItemPicker.selectedRow(inComponent: 0)]
-            
-            
-        default:
-            break
-        }
-        
-        
-        constraintForPickerView.constant = -500
-        UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
-    }
-    
-    
-    //MARK: Single Action On all Buttons
-    
-    @IBAction func openPickerView(_ sender: UIButton) {
-        
-        switch sender {
-        case btnVehicleType:
-            
-            lblPIckerTitle.text = Names.vehicleType.rawValue
-            pickerType = .vehicletypePicker
-            self .fetchData(url: "vehicleTypes" , button: sender)
-            
-//            fetchSomeData(url: "vehicleTypes") { (Result) in
-//                switch Result {
-//                case .success(let data):
-//                    do {
-//                        let vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
-//                        self.vehicleTypeArray = vehicleInfo.data
-//                        DispatchQueue.main.async {
-//                            self.ItemPicker.reloadAllComponents()
-//                        }
-//                    }catch let error{
-//                        print(error.localizedDescription)
-//                    }
-//                case .failure(let error):
-//                    print(error)
-//                }
-//            }
-            
-            
-            constraintForPickerView.constant = 0
-            UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
-            
-        case btnMake:
-            lblPIckerTitle.text = Names.make.rawValue
-            
             if txtVehicleType.text != nil{
                 guard  let vehicleType = selectedVehicleType?.typeForGetMakersAndModelsAPi else {return}
                 pickerType = .makePicker
                 //add fetch data method here
                 let url = "vehicleMakers?type=\(vehicleType)"
-                fetchData(url: url, button: sender)
+                fetchData(url: url, forThis: pickerType)
             }
-            ItemPicker.reloadAllComponents()
-            constraintForPickerView.constant = 0
-            UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
             
-        case btnModel:
-            lblPIckerTitle.text = Names.model.rawValue
+        case .makePicker:
+            selectedMaker = makerArray?[ItemPicker.selectedRow(inComponent: 0)]
+            txtMake.text = selectedMaker?.MakeName
+            refreshModel()
             if txtMake.text != nil{
                 guard let vehicleType = selectedVehicleType?.typeForGetMakersAndModelsAPi , let vehicleMakeId = selectedMaker?.MakeId else {return}
-                let url = "vehicleModels?type=\(vehicleType)&makeId=\(vehicleMakeId).0"
-                fetchData(url: url, button: sender)
                 pickerType = .modelPicker
+                let url = "vehicleModels?type=\(vehicleType)&makeId=\(vehicleMakeId).0"
+                fetchData(url: url , forThis: pickerType)
+                
             }
-            ItemPicker.reloadAllComponents()
-            // add fetch data method here
-            constraintForPickerView.constant = 0
-            UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
             
-        case btnColor:
+            
+        case .modelPicker:
+            selectdModel = modelArray?[ItemPicker.selectedRow(inComponent: 0)]
+            txtModel.text = selectdModel?.Model_Name
+            
+        case .colorPicker:
+            txtColor.text = carColors[ItemPicker.selectedRow(inComponent: 0)]
+            
+        case .yearPicker:
+            txtYear.text = carYear[ItemPicker.selectedRow(inComponent: 0)]
+            
+        default:
+            break
+        }
+         
+        showHidePickerView(false)
+    }
+    
+    //MARK: Single Action On all Buttons
+    
+    @IBAction func openPickerView(_ sender: UIButton) {
+        
+        switch sender.tag {
+        case 1:
+            
+            lblPIckerTitle.text = Names.vehicleType.rawValue
+            pickerType = .vehicletypePicker
+            showHidePickerView(true)
+            
+        case 2:
+            lblPIckerTitle.text = Names.make.rawValue
+            pickerType = .makePicker
+            showHidePickerView(true)
+            
+        case 3:
+            lblPIckerTitle.text = Names.model.rawValue
+            showHidePickerView(true)
+            
+        case 4:
             lblPIckerTitle.text = Names.color.rawValue
             pickerType = .colorPicker
-            ItemPicker.reloadAllComponents()
-            constraintForPickerView.constant = 0
-            UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
+            showHidePickerView(true)
             
-        case btnYear:
+        case 5:
             lblPIckerTitle.text = Names.year.rawValue
             pickerType = .yearPicker
-            ItemPicker.reloadAllComponents()
-            constraintForPickerView.constant = 0
-            UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
+            showHidePickerView(true)
             
         default:
             break
@@ -281,15 +231,8 @@ class AddVehicleViewController: UIViewController {
     }
     
     //MARK: Method To fetch Data from api
-    
-    func fetchDataForVehicleType(){
-        //fetchData(url: "vehicleTypes", button: <#T##UIButton#>)
-    }
-    
-    
-    
-    func fetchData(url: String , button: UIButton) {
-        //getToken()
+
+    func fetchData(url: String , forThis: PickerType) {
         let url = URL(string: "http://api.mevron.com/v1/user/\(url)")
         var request = URLRequest(url: url!)
         request.httpMethod = "GET"
@@ -308,92 +251,38 @@ class AddVehicleViewController: UIViewController {
             guard let httpResponse = response as? HTTPURLResponse else { return }
             print(httpResponse.statusCode)
             self.hideLoader()
-            guard let data = data else {
-                print(error.debugDescription)
-                return
-            }
-            
-            switch button {
-            case self.btnVehicleType:
-                do {
-                    let vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
-                    self.vehicleTypeArray = vehicleInfo.data
-                    //print(self.vehicleInfo)
-                    
-                } catch let error {print(error.localizedDescription)}
-                
-                DispatchQueue.main.async {
-                    self.ItemPicker.reloadAllComponents()
-                }
-                
-            case self.btnMake:
-                do {
-                    let makerInfo = try JSONDecoder().decode(VehicleMakerInfo.self, from: data)
-                    self.makerArray = makerInfo.data
-                } catch let error {print(error.localizedDescription)}
-                
-                DispatchQueue.main.async {
-                    self.ItemPicker.reloadAllComponents()
-                }
-                
-            case self.btnModel:
-                do {
-                    let modelInfo = try JSONDecoder().decode(VehicleModelInfo.self, from: data)
-                    self.modelArray = modelInfo.data
-                } catch let error {print(error.localizedDescription)}
-                DispatchQueue.main.async {
-                    self.ItemPicker.reloadAllComponents()
-                }
-            default:
-                break
-                
-            }
-        }
-        task.resume()
-    }
-    
-    //////////////////////////////////////////////////////////////////
-    func FetchData(url: String , forThis: Names) {
-        let currentUser = Auth.auth().currentUser
-        currentUser?.getIDToken(completion: { (token, error) in
-            self.CurrentToken = token
-            print(token)
-        })
-        let url = URL(string: "http://api.mevron.com/v1/user/\(url)")
-        var request = URLRequest(url: url!)
-        request.httpMethod = "GET"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        guard let tokenId = CurrentToken else { return }
-        request.allHTTPHeaderFields = ["Authorization" : "\(tokenId)"]
-        
-        let task = URLSession.shared.dataTask(with: request){
-            (data , response , error) in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            
-            guard let httpResponse = response as? HTTPURLResponse else { return }
-            print(httpResponse.statusCode)
             
             guard let data = data else {
                 print(error.debugDescription)
                 return
             }
             switch forThis{
-            case .vehicleType:
+            case .vehicletypePicker:
                 do {
                     let vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
                     self.vehicleTypeArray = vehicleInfo.data
-                    //print(self.vehicleInfo)
                 } catch let error {print(error.localizedDescription)}
                     DispatchQueue.main.async {
                     self.ItemPicker.reloadAllComponents()
                 }
-            case .make:
-                print("not available")
-            case .model:
-                print("not available")
+            case .makePicker:
+                do {
+                    let makerInfo = try JSONDecoder().decode(VehicleMakerInfo.self, from: data)
+                    self.makerArray = makerInfo.data
+                } catch let error {print(error.localizedDescription)}
+                    DispatchQueue.main.async {
+                    self.ItemPicker.reloadAllComponents()
+                }
+                
+            case .modelPicker:
+                do {
+                    let modelInfo  = try JSONDecoder().decode(VehicleModelInfo.self, from: data)
+                    self.modelArray = modelInfo.data
+                } catch let error {print(error.localizedDescription)}
+                    DispatchQueue.main.async {
+                    self.ItemPicker.reloadAllComponents()
+                }
+                
             default:
                 print("sorrry")
             }
@@ -401,30 +290,29 @@ class AddVehicleViewController: UIViewController {
         }
         task.resume()
     }
-    ////////////////////////////////////////////////////////////////
     
-    func fetchSomeData(url : String , completionHandler: @escaping (Result< Data, Error >) -> () ){
-        let url = URL(string: "http://api.mevron.com/v1/user/\(url)")
-        var request = URLRequest(url: url!)
-        request.httpMethod = "GET"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        guard let tokenId = CurrentToken else { return }
-        request.allHTTPHeaderFields = ["Authorization" : "\(tokenId)"]
-        
-        let task = URLSession.shared.dataTask(with: request) { (data , response , error) in
-            if let error = error{
-                completionHandler(.failure(error))
-            }
-            
-            guard let data = data else {return}
-            
-            completionHandler(.success(data))
-            
-            
-        }
-        task.resume()
-    }
+//    func fetchSomeData(url : String , completionHandler: @escaping (Result< Data, Error >) -> () ){
+//        let url = URL(string: "http://api.mevron.com/v1/user/\(url)")
+//        var request = URLRequest(url: url!)
+//        request.httpMethod = "GET"
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.addValue("application/json", forHTTPHeaderField: "Accept")
+//        guard let tokenId = CurrentToken else { return }
+//        request.allHTTPHeaderFields = ["Authorization" : "\(tokenId)"]
+//
+//        let task = URLSession.shared.dataTask(with: request) { (data , response , error) in
+//            if let error = error{
+//                completionHandler(.failure(error))
+//            }
+//
+//            guard let data = data else {return}
+//
+//            completionHandler(.success(data))
+//
+//
+//        }
+//        task.resume()
+//    }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(identifier: "ResidentialAddressViewController") as! ResidentialAddressViewController
@@ -452,6 +340,24 @@ class AddVehicleViewController: UIViewController {
             SVProgressHUD.dismiss()
         }
     }
+    
+    
+    func showHidePickerView(_ show: Bool) {
+        if show {
+            constraintForPickerView.constant = 0
+            ItemPicker.selectRow(0, inComponent: 0, animated: true)
+            ItemPicker.reloadAllComponents()
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+            }
+        }
+        else {
+                constraintForPickerView.constant = -viewItemPicker.frame.height
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        }
+    }
+   }
 }
 
 

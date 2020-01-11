@@ -13,7 +13,7 @@
 		9A1F8A9623BF57E100F07D2F /* VerificationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1F8A9523BF57E100F07D2F /* VerificationCodeViewController.swift */; };
 		9A4FCEFC23BDD3E400F87F62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4FCEFB23BDD3E400F87F62 /* AppDelegate.swift */; };
 		9A4FCEFE23BDD3E400F87F62 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4FCEFD23BDD3E400F87F62 /* SceneDelegate.swift */; };
-		9A4FCF0023BDD3E400F87F62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4FCEFF23BDD3E400F87F62 /* ViewController.swift */; };
+		9A4FCF0023BDD3E400F87F62 /* LoginAndSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A4FCEFF23BDD3E400F87F62 /* LoginAndSignUpViewController.swift */; };
 		9A4FCF0323BDD3E400F87F62 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A4FCF0123BDD3E400F87F62 /* Main.storyboard */; };
 		9A4FCF0523BDD3E800F87F62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9A4FCF0423BDD3E800F87F62 /* Assets.xcassets */; };
 		9A4FCF0823BDD3E800F87F62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9A4FCF0623BDD3E800F87F62 /* LaunchScreen.storyboard */; };
@@ -33,7 +33,7 @@
 		9A4FCEF823BDD3E400F87F62 /* My Taxi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My Taxi.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A4FCEFB23BDD3E400F87F62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9A4FCEFD23BDD3E400F87F62 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		9A4FCEFF23BDD3E400F87F62 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9A4FCEFF23BDD3E400F87F62 /* LoginAndSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAndSignUpViewController.swift; sourceTree = "<group>"; };
 		9A4FCF0223BDD3E400F87F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9A4FCF0423BDD3E800F87F62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9A4FCF0723BDD3E800F87F62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 				9AFB15D923C5E6490009CB21 /* BankVerificationViewController.swift */,
 				9A4FCEFB23BDD3E400F87F62 /* AppDelegate.swift */,
 				9A4FCEFD23BDD3E400F87F62 /* SceneDelegate.swift */,
-				9A4FCEFF23BDD3E400F87F62 /* ViewController.swift */,
+				9A4FCEFF23BDD3E400F87F62 /* LoginAndSignUpViewController.swift */,
 				9A1F8A9523BF57E100F07D2F /* VerificationCodeViewController.swift */,
 				9A1F67F023C0B37600477703 /* CustomControls.swift */,
 				9A4FCF0123BDD3E400F87F62 /* Main.storyboard */,
@@ -237,7 +237,7 @@
 				9A4FCF1023BE030F00F87F62 /* EnterPhoneViewController.swift in Sources */,
 				9AFB15DA23C5E6490009CB21 /* BankVerificationViewController.swift in Sources */,
 				9AB704A023C31788007DA449 /* AddVehicleViewController.swift in Sources */,
-				9A4FCF0023BDD3E400F87F62 /* ViewController.swift in Sources */,
+				9A4FCF0023BDD3E400F87F62 /* LoginAndSignUpViewController.swift in Sources */,
 				9AC6522A23C4CA2A00A15CFE /* ResidentialAddressViewController.swift in Sources */,
 				9A4FCEFC23BDD3E400F87F62 /* AppDelegate.swift in Sources */,
 				9A1F8A9623BF57E100F07D2F /* VerificationCodeViewController.swift in Sources */,

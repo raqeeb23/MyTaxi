@@ -23,6 +23,7 @@ class ResidentialAddressViewController: UIViewController {
     
     @IBOutlet weak var btnState: UIButton!
     @IBOutlet weak var btnCity: UIButton!
+    @IBOutlet weak var viewItemPicker: UIView!
     
     @IBOutlet weak var lblPickerTitle: UILabel!
     
@@ -84,22 +85,18 @@ class ResidentialAddressViewController: UIViewController {
     @IBAction func OpenPickerView(_ sender: UIButton) {
         
         
-        switch sender {
-        case btnState:
+        switch sender.tag {
+        case 1:
             pickerType = .state
             // this can be filled using api data
-            itemPickerView.reloadAllComponents()
             lblPickerTitle.text = PickerTitleEnum.state.rawValue
-            constraintBottomPickerView.constant = 0
-            UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
+            showHidePickerView(true)
         
-        case btnCity:
+        case 2:
             pickerType = .city
             // this is can be filled using api data
-            itemPickerView.reloadAllComponents()
             lblPickerTitle.text = PickerTitleEnum.city.rawValue
-            constraintBottomPickerView.constant = 0
-            UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
+            showHidePickerView(true)
         default:
             break
         }
@@ -108,18 +105,17 @@ class ResidentialAddressViewController: UIViewController {
 
     
     @IBAction func canelButtonPressed(_ sender: UIButton) {
-        constraintBottomPickerView.constant = -500
-        UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
+       showHidePickerView(false)
     }
     
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
-        switch lblPickerTitle.text {
+        switch pickerType {
                
-               case PickerTitleEnum.state.rawValue:
+        case .state:
                 txtState.text = stateArray[itemPickerView.selectedRow(inComponent: 0)]
                
-               case PickerTitleEnum.city.rawValue:
+        case .city:
                 txtCity.text = cityArray[itemPickerView.selectedRow(inComponent: 0)]
                 txtResidentialAddress.becomeFirstResponder()
                
@@ -127,8 +123,7 @@ class ResidentialAddressViewController: UIViewController {
                    break
                }
         
-        constraintBottomPickerView.constant = -500
-        UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
+        showHidePickerView(false)
         
     }
     
@@ -137,6 +132,24 @@ class ResidentialAddressViewController: UIViewController {
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(identifier: "AddPhotoViewController") as! AddPhotoViewController
         navigationController?.pushViewController(vc , animated: true)
+    }
+    
+    
+    func showHidePickerView(_ show: Bool) {
+         if show {
+             constraintBottomPickerView.constant = 0
+             itemPickerView.selectRow(0, inComponent: 0, animated: true)
+             itemPickerView.reloadAllComponents()
+             UIView.animate(withDuration: 0.5) {
+                 self.view.layoutIfNeeded()
+             }
+         }
+         else {
+                 constraintBottomPickerView.constant = -viewItemPicker.frame.height
+         UIView.animate(withDuration: 0.5) {
+             self.view.layoutIfNeeded()
+         }
+       }
     }
 }
 
