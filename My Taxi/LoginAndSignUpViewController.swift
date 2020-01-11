@@ -8,7 +8,12 @@
 
 import UIKit
 
+<<<<<<< HEAD:My Taxi/LoginAndSignUpViewController.swift
 class LoginAndSignUpViewController: UIViewController {
+=======
+//Zubair: Make sure the the class is named according to the function it performs.
+class ViewController: UIViewController {
+>>>>>>> 74736164fc25f5ad436a55d57e201f7c06065286:My Taxi/ViewController.swift
 
     override func viewDidLoad() {
         super.viewDidLoad()

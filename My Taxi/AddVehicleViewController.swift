@@ -28,6 +28,7 @@ enum PickerType{
     case city
 }
 
+//Zubair: Decoding will fail if any of the variables defined insided VehicleInfo is nil, you can have optional variables in this case.
 struct VehicleInfo: Decodable {
     let statusCode: Int?
     let msg: String?
@@ -79,6 +80,7 @@ struct VModel: Decodable {
 
 class AddVehicleViewController: UIViewController {
     
+    //Zubair: This is good. Nice to see the proper conventions for naming IBOutlets
     
     @IBOutlet weak var txtVehicleType: myTaxiBasicTextfield!
     @IBOutlet weak var txtMake: myTaxiBasicTextfield!
@@ -187,6 +189,7 @@ class AddVehicleViewController: UIViewController {
     
     @IBAction func openPickerView(_ sender: UIButton) {
         
+
         switch sender.tag {
         case 1:
             
@@ -232,6 +235,7 @@ class AddVehicleViewController: UIViewController {
     
     //MARK: Method To fetch Data from api
 
+
     func fetchData(url: String , forThis: PickerType) {
         let url = URL(string: "http://api.mevron.com/v1/user/\(url)")
         var request = URLRequest(url: url!)
@@ -256,6 +260,7 @@ class AddVehicleViewController: UIViewController {
                 print(error.debugDescription)
                 return
             }
+
             switch forThis{
             case .vehicletypePicker:
                 do {

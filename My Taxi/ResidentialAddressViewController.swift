@@ -83,10 +83,17 @@ class ResidentialAddressViewController: UIViewController {
     }
     
     @IBAction func OpenPickerView(_ sender: UIButton) {
+<<<<<<< HEAD
         
         
         switch sender.tag {
         case 1:
+=======
+        //Zubair: Rather than switching sender, you can assign the tag for each button from storyboard and then use sender.tag to switch. This way you won't have to create IBOutlets for all the buttons
+        switch sender {
+        case btnState:
+            //Zubair: Inside any case you should only assign the value to your pickerType variable and set the picker title. The rest of the operations can be performed outside the switch case.
+>>>>>>> 74736164fc25f5ad436a55d57e201f7c06065286
             pickerType = .state
             // this can be filled using api data
             lblPickerTitle.text = PickerTitleEnum.state.rawValue
@@ -110,7 +117,12 @@ class ResidentialAddressViewController: UIViewController {
     
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
+<<<<<<< HEAD
         switch pickerType {
+=======
+        //Zubair: Can't you switch using the value assigned to pickerType earlier?
+        switch lblPickerTitle.text {
+>>>>>>> 74736164fc25f5ad436a55d57e201f7c06065286
                
         case .state:
                 txtState.text = stateArray[itemPickerView.selectedRow(inComponent: 0)]
