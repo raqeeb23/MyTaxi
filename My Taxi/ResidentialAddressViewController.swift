@@ -23,6 +23,7 @@ class ResidentialAddressViewController: UIViewController {
     
     @IBOutlet weak var btnState: UIButton!
     @IBOutlet weak var btnCity: UIButton!
+    @IBOutlet weak var viewItemPicker: UIView!
     
     @IBOutlet weak var lblPickerTitle: UILabel!
     
@@ -82,24 +83,27 @@ class ResidentialAddressViewController: UIViewController {
     }
     
     @IBAction func OpenPickerView(_ sender: UIButton) {
+<<<<<<< HEAD
         
         
+        switch sender.tag {
+        case 1:
+=======
+        //Zubair: Rather than switching sender, you can assign the tag for each button from storyboard and then use sender.tag to switch. This way you won't have to create IBOutlets for all the buttons
         switch sender {
         case btnState:
+            //Zubair: Inside any case you should only assign the value to your pickerType variable and set the picker title. The rest of the operations can be performed outside the switch case.
+>>>>>>> 74736164fc25f5ad436a55d57e201f7c06065286
             pickerType = .state
             // this can be filled using api data
-            itemPickerView.reloadAllComponents()
             lblPickerTitle.text = PickerTitleEnum.state.rawValue
-            constraintBottomPickerView.constant = 0
-            UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
+            showHidePickerView(true)
         
-        case btnCity:
+        case 2:
             pickerType = .city
             // this is can be filled using api data
-            itemPickerView.reloadAllComponents()
             lblPickerTitle.text = PickerTitleEnum.city.rawValue
-            constraintBottomPickerView.constant = 0
-            UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
+            showHidePickerView(true)
         default:
             break
         }
@@ -108,18 +112,22 @@ class ResidentialAddressViewController: UIViewController {
 
     
     @IBAction func canelButtonPressed(_ sender: UIButton) {
-        constraintBottomPickerView.constant = -500
-        UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
+       showHidePickerView(false)
     }
     
     
     @IBAction func doneButtonPressed(_ sender: UIButton) {
+<<<<<<< HEAD
+        switch pickerType {
+=======
+        //Zubair: Can't you switch using the value assigned to pickerType earlier?
         switch lblPickerTitle.text {
+>>>>>>> 74736164fc25f5ad436a55d57e201f7c06065286
                
-               case PickerTitleEnum.state.rawValue:
+        case .state:
                 txtState.text = stateArray[itemPickerView.selectedRow(inComponent: 0)]
                
-               case PickerTitleEnum.city.rawValue:
+        case .city:
                 txtCity.text = cityArray[itemPickerView.selectedRow(inComponent: 0)]
                 txtResidentialAddress.becomeFirstResponder()
                
@@ -127,8 +135,7 @@ class ResidentialAddressViewController: UIViewController {
                    break
                }
         
-        constraintBottomPickerView.constant = -500
-        UIView.animate(withDuration: 0.4, delay: 0 , options: .curveEaseOut , animations: {self.view.layoutIfNeeded()} , completion: nil)
+        showHidePickerView(false)
         
     }
     
@@ -137,6 +144,24 @@ class ResidentialAddressViewController: UIViewController {
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(identifier: "AddPhotoViewController") as! AddPhotoViewController
         navigationController?.pushViewController(vc , animated: true)
+    }
+    
+    
+    func showHidePickerView(_ show: Bool) {
+         if show {
+             constraintBottomPickerView.constant = 0
+             itemPickerView.selectRow(0, inComponent: 0, animated: true)
+             itemPickerView.reloadAllComponents()
+             UIView.animate(withDuration: 0.5) {
+                 self.view.layoutIfNeeded()
+             }
+         }
+         else {
+                 constraintBottomPickerView.constant = -viewItemPicker.frame.height
+         UIView.animate(withDuration: 0.5) {
+             self.view.layoutIfNeeded()
+         }
+       }
     }
 }
 
