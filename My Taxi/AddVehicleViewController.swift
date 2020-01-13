@@ -127,7 +127,7 @@ class AddVehicleViewController: UIViewController {
         ItemPicker.delegate = self
         ItemPicker.dataSource = self
         // Do any additional setup after loading the view
-       let currentUser = Auth.auth().currentUser
+        let currentUser = Auth.auth().currentUser
         currentUser?.getIDToken(completion: { (token, error) in
             self.CurrentToken = token
             print(token)
@@ -137,7 +137,7 @@ class AddVehicleViewController: UIViewController {
     }
     
     @IBAction func cancelButtonPressed(_ sender: UIButton) {
-       showHidePickerView(false)
+        showHidePickerView(false)
     }
     
     
@@ -181,7 +181,7 @@ class AddVehicleViewController: UIViewController {
         default:
             break
         }
-         
+        
         showHidePickerView(false)
     }
     
@@ -189,7 +189,7 @@ class AddVehicleViewController: UIViewController {
     
     @IBAction func openPickerView(_ sender: UIButton) {
         
-
+        
         switch sender.tag {
         case 1:
             
@@ -234,8 +234,8 @@ class AddVehicleViewController: UIViewController {
     }
     
     //MARK: Method To fetch Data from api
-
-
+    
+    
     func fetchData(url: String , forThis: PickerType) {
         let url = URL(string: "http://api.mevron.com/v1/user/\(url)")
         var request = URLRequest(url: url!)
@@ -260,33 +260,16 @@ class AddVehicleViewController: UIViewController {
                 print(error.debugDescription)
                 return
             }
-
+            
             switch forThis{
             case .vehicletypePicker:
-                do {
-                    let vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
-                    self.vehicleTypeArray = vehicleInfo.data
-                } catch let error {print(error.localizedDescription)}
-                    DispatchQueue.main.async {
-                    self.ItemPicker.reloadAllComponents()
-                }
+                self.decodeVehicleTypedata(data: data)
+                
             case .makePicker:
-                do {
-                    let makerInfo = try JSONDecoder().decode(VehicleMakerInfo.self, from: data)
-                    self.makerArray = makerInfo.data
-                } catch let error {print(error.localizedDescription)}
-                    DispatchQueue.main.async {
-                    self.ItemPicker.reloadAllComponents()
-                }
+                self.decodeMakerData(data: data)
                 
             case .modelPicker:
-                do {
-                    let modelInfo  = try JSONDecoder().decode(VehicleModelInfo.self, from: data)
-                    self.modelArray = modelInfo.data
-                } catch let error {print(error.localizedDescription)}
-                    DispatchQueue.main.async {
-                    self.ItemPicker.reloadAllComponents()
-                }
+                self.decodeModelData(data: data)
                 
             default:
                 print("sorrry")
@@ -296,28 +279,60 @@ class AddVehicleViewController: UIViewController {
         task.resume()
     }
     
-//    func fetchSomeData(url : String , completionHandler: @escaping (Result< Data, Error >) -> () ){
-//        let url = URL(string: "http://api.mevron.com/v1/user/\(url)")
-//        var request = URLRequest(url: url!)
-//        request.httpMethod = "GET"
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.addValue("application/json", forHTTPHeaderField: "Accept")
-//        guard let tokenId = CurrentToken else { return }
-//        request.allHTTPHeaderFields = ["Authorization" : "\(tokenId)"]
-//
-//        let task = URLSession.shared.dataTask(with: request) { (data , response , error) in
-//            if let error = error{
-//                completionHandler(.failure(error))
-//            }
-//
-//            guard let data = data else {return}
-//
-//            completionHandler(.success(data))
-//
-//
-//        }
-//        task.resume()
-//    }
+ 
+    func decodeVehicleTypedata(data: Data){
+        do {
+            let vehicleInfo = try JSONDecoder().decode(VehicleInfo.self, from: data)
+            self.vehicleTypeArray = vehicleInfo.data
+        } catch let error {print(error.localizedDescription)}
+        DispatchQueue.main.async {
+            self.ItemPicker.reloadAllComponents()
+        }
+    }
+    
+    func decodeMakerData(data: Data){
+        do {
+            let makerInfo = try JSONDecoder().decode(VehicleMakerInfo.self, from: data)
+            self.makerArray = makerInfo.data
+        } catch let error {print(error.localizedDescription)}
+        DispatchQueue.main.async {
+            self.ItemPicker.reloadAllComponents()
+        }
+    }
+    
+    func decodeModelData(data: Data){
+        do {
+            let modelInfo  = try JSONDecoder().decode(VehicleModelInfo.self, from: data)
+            self.modelArray = modelInfo.data
+        } catch let error {print(error.localizedDescription)}
+        DispatchQueue.main.async {
+            self.ItemPicker.reloadAllComponents()
+        }
+    }
+    
+    
+    //    func fetchSomeData(url : String , completionHandler: @escaping (Result< Data, Error >) -> () ){
+    //        let url = URL(string: "http://api.mevron.com/v1/user/\(url)")
+    //        var request = URLRequest(url: url!)
+    //        request.httpMethod = "GET"
+    //        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+    //        request.addValue("application/json", forHTTPHeaderField: "Accept")
+    //        guard let tokenId = CurrentToken else { return }
+    //        request.allHTTPHeaderFields = ["Authorization" : "\(tokenId)"]
+    //
+    //        let task = URLSession.shared.dataTask(with: request) { (data , response , error) in
+    //            if let error = error{
+    //                completionHandler(.failure(error))
+    //            }
+    //
+    //            guard let data = data else {return}
+    //
+    //            completionHandler(.success(data))
+    //
+    //
+    //        }
+    //        task.resume()
+    //    }
     
     @IBAction func nextButtonPressed(_ sender: UIButton) {
         let vc = storyboard?.instantiateViewController(identifier: "ResidentialAddressViewController") as! ResidentialAddressViewController
@@ -357,12 +372,12 @@ class AddVehicleViewController: UIViewController {
             }
         }
         else {
-                constraintForPickerView.constant = -viewItemPicker.frame.height
-        UIView.animate(withDuration: 0.5) {
-            self.view.layoutIfNeeded()
+            constraintForPickerView.constant = -viewItemPicker.frame.height
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+            }
         }
     }
-   }
 }
 
 
